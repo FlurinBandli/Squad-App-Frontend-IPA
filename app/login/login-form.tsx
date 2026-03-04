@@ -74,7 +74,7 @@ export default function LoginForm() {
       <Card className="w-full max-w-md bg-white shadow-lg">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Admin Login</CardTitle>
-          <Image src="/team_logo.png" alt="Logo" width={60} height={60} />
+          <Image src="/fc-zh-leutschenbach-logo.png" alt="Logo" width={60} height={60} />
         </CardHeader>
         <CardContent>
           {loginError && <p className="text-sm mb-1 text-red-600">{loginError}</p>}
