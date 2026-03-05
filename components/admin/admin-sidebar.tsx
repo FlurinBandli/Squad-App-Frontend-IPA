@@ -22,8 +22,8 @@ import {
 // Sidebar navigation items with labels, icons, and links
 const menuItems = [
   { label: "Teams", icon: Volleyball, href: "/admin/squads" },
-  { label: "Players", icon: Users, href: "/admin/players" },
-  { label: "Trainers", icon: UserStar, href: "/admin/trainers" },
+  { label: "Spieler", icon: Users, href: "/admin/players" },
+  { label: "Trainer", icon: UserStar, href: "/admin/trainers" },
 ];
 
 export default function AdminSidebar() {
