@@ -38,7 +38,7 @@ export async function GetNestToken(): Promise<string> {
  * This allows you to call any protected API endpoint without worrying about authentication details in your components.
  * @param endpoint The specific API endpoint to call (e.g., "api/squad").
  */
-export async function NestFetch(endpoint: string) {
+export async function NestFetch<T>(endpoint: string): Promise<T> {
   // Get a valid bearer token for authentication
   const token = await GetNestToken();
 
