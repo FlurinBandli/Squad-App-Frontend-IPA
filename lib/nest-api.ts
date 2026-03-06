@@ -37,16 +37,19 @@ export async function GetNestToken(): Promise<string> {
  * Before making the request, it retrieves a valid JWT token using GetNestToken and includes it in the Authorization header.
  * This allows you to call any protected API endpoint without worrying about authentication details in your components.
  * @param endpoint The specific API endpoint to call (e.g., "api/squad").
+ * @param init Optional RequestInit object to customize the fetch request (e.g., method, body).
  */
-export async function NestFetch(endpoint: string) {
+export async function NestFetch<T>(endpoint: string, init: RequestInit = {}): Promise<T> {
   // Get a valid bearer token for authentication
   const token = await GetNestToken();
 
   const response = await fetch(`${process.env.NEST_API_URL}${endpoint}`, {
+    ...init,
     headers: {
       "Content-Type": "application/json",
       // Attach the bearer token to authorize the request
       Authorization: `Bearer ${token}`,
+      ...(init.headers ?? {}),
     },
   });
 
@@ -55,6 +58,13 @@ export async function NestFetch(endpoint: string) {
     throw new Error(`Fehler bei der Anfrage an die Nest API: ${response.statusText}`);
   }
 
+  const text = await response.text();
+
+  // If the response is empty, return undefined (e.g., for DELETE requests)
+  if (!text) {
+    return undefined as T;
+  }
+
   // Return the JSON response from the API
-  return response.json();
+  return JSON.parse(text) as T;
 }
