@@ -39,7 +39,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(data ?? {}, { status: 201 });
   } catch (error) {
-    console.error("Error creating squad:", error);
+    console.error("Fehler beim Erstellen des Teams:", error);
     return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
   }
 }

@@ -7,7 +7,7 @@ import { NestFetch } from "@/lib/nest-api";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { Player, Trainer } from "@/types";
-import SquadForm from "@/app/admin/squads/new/components/squad-form";
+import SquadForm from "@/app/admin/squads/components/squad-form";
 
 export default async function NewSquad() {
   /**

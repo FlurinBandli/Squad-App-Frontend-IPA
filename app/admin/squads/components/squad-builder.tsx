@@ -12,11 +12,11 @@
 
 import { Player, Trainer } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import PlayerCombobox from "./player-combobox";
+import PlayerCombobox from "@/app/admin/squads/components/player-combobox";
 import { Button } from "@/components/ui/button";
 import { UserPlus, UserMinus } from "lucide-react";
-import { useState } from "react";
-import TrainerCombobox from "./trainer-combobox";
+import { useState, Dispatch, SetActionState } from "react";
+import TrainerCombobox from "@/app/admin/squads/components/trainer-combobox";
 
 export default function SquadBuilder({
   players,
@@ -27,7 +27,7 @@ export default function SquadBuilder({
   players: Player[];
   trainers: Trainer[];
   squad: SquadState;
-  setSquad: SquadState;
+  setSquad: Dispatch<SetActionState<SquadState>>;
 }) {
   /**
    * State variables to track whether the combobox for adding a player/trainer is open for each position.
@@ -40,7 +40,7 @@ export default function SquadBuilder({
   const [addingBackup, setAddingBackup] = useState(false);
   const [addingTrainer, setAddingTrainer] = useState(false);
 
-  const selectedPlayerIds = squad.players.map((p) => p.id);
+  const selectedPlayerIds = squad.players.map((sp) => sp.player.id);
 
   const playersByPosition = (position: Position) =>
     squad.players.filter((sp) => sp.position === position).map((sp) => sp.player);
@@ -99,7 +99,7 @@ export default function SquadBuilder({
             </div>
 
             <div className="flex flex-row justify-center gap-2">
-              {playersByPosition("striker").map((player) => (
+              {playersByPosition("Striker").map((player) => (
                 <div key={player.id} className="flex flex-col w-32 items-center text-center gap-2">
                   <Button
                     type="button"
@@ -119,7 +119,7 @@ export default function SquadBuilder({
                 <PlayerCombobox
                   players={players.filter((p) => !selectedPlayerIds.includes(p.id))}
                   onSelect={(player) => {
-                    addPlayerToPosition(player, "striker");
+                    addPlayerToPosition(player, "Striker");
                     setAddingStriker(false);
                   }}
                 />
@@ -136,7 +136,7 @@ export default function SquadBuilder({
             </div>
 
             <div className="flex flex-row justify-center gap-2">
-              {playersByPosition("midfielder").map((player) => (
+              {playersByPosition("Midfielder").map((player) => (
                 <div key={player.id} className="flex flex-col w-32 items-center text-center gap-2">
                   <Button
                     type="button"
@@ -156,7 +156,7 @@ export default function SquadBuilder({
                 <PlayerCombobox
                   players={players.filter((p) => !selectedPlayerIds.includes(p.id))}
                   onSelect={(player) => {
-                    addPlayerToPosition(player, "midfielder");
+                    addPlayerToPosition(player, "Midfielder");
                     setAddingMidfielder(false);
                   }}
                 />
@@ -173,7 +173,7 @@ export default function SquadBuilder({
             </div>
 
             <div className="flex flex-row justify-center gap-2">
-              {playersByPosition("defender").map((player) => (
+              {playersByPosition("Defender").map((player) => (
                 <div key={player.id} className="flex flex-col w-32 items-center text-center gap-2">
                   <Button
                     type="button"
@@ -193,7 +193,7 @@ export default function SquadBuilder({
                 <PlayerCombobox
                   players={players.filter((p) => !selectedPlayerIds.includes(p.id))}
                   onSelect={(player) => {
-                    addPlayerToPosition(player, "defender");
+                    addPlayerToPosition(player, "Defender");
                     setAddingDefender(false);
                   }}
                 />
@@ -210,7 +210,7 @@ export default function SquadBuilder({
             </div>
 
             <div className="flex flex-row justify-center gap-2">
-              {playersByPosition("goalkeeper").map((player) => (
+              {playersByPosition("Goalkeeper").map((player) => (
                 <div key={player.id} className="flex flex-col w-32 items-center text-center gap-2">
                   <Button
                     type="button"
@@ -230,7 +230,7 @@ export default function SquadBuilder({
                 <PlayerCombobox
                   players={players.filter((p) => !selectedPlayerIds.includes(p.id))}
                   onSelect={(player) => {
-                    addPlayerToPosition(player, "goalkeeper");
+                    addPlayerToPosition(player, "Goalkeeper");
                     setAddingGoalkeeper(false);
                   }}
                 />
@@ -288,7 +288,7 @@ export default function SquadBuilder({
             </div>
 
             <div className="flex flex-row justify-center gap-2">
-              {playersByPosition("backup").map((player) => (
+              {playersByPosition("Backup").map((player) => (
                 <div key={player.id} className="flex flex-col w-32 items-center text-center gap-2">
                   <Button
                     type="button"
@@ -308,7 +308,7 @@ export default function SquadBuilder({
                 <PlayerCombobox
                   players={players.filter((p) => !selectedPlayerIds.includes(p.id))}
                   onSelect={(player) => {
-                    addPlayerToPosition(player, "backup");
+                    addPlayerToPosition(player, "Backup");
                     setAddingBackup(false);
                   }}
                 />

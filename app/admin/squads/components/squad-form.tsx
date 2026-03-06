@@ -1,6 +1,12 @@
 "use client";
 
-import { Player, SquadState, Trainer, SquadPlayerInput } from "@/types";
+/**
+ * SquadForm component responsible for rendering the squad creation/editing form.
+ * It includes input fields for squad information and integrates the SquadBuilder component for managing players and trainers.
+ * The form uses React Hook Form with Zod for validation and submits the data to the backend API.
+ */
+
+import { Player, SquadState, Trainer, SquadPlayerInput, Squad } from "@/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -9,7 +15,7 @@ import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import SquadBuilder from "@/app/admin/squads/new/components/squad-builder";
+import SquadBuilder from "@/app/admin/squads/components/squad-builder";
 import { useRouter } from "next/navigation";
 
 /**
@@ -26,9 +32,13 @@ const formSchema = z.object({
 export default function SquadForm({
   players,
   trainers,
+  mode = "create",
+  initialSquad,
 }: {
   players: Player[];
   trainers: Trainer[];
+  mode: "create" | "edit";
+  initialSquad?: Squad;
 }) {
   /**
    * Initializes React Hook Form with Zod validation.
@@ -37,15 +47,40 @@ export default function SquadForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      date: "",
+      name: mode === "edit" && initialSquad ? initialSquad.name : "",
+      description: mode === "edit" && initialSquad ? initialSquad.description : "",
+      date: mode === "edit" && initialSquad ? initialSquad.date.split("T")[0] : "",
     },
   });
+  /**
+   * Prefill the form and squad state in edit mode.
+   */
+  const mappedInitialPlayers =
+    mode === "edit" && initialSquad
+      ? initialSquad.squadPlayers
+          .map((sp) => {
+            const fullPlayer = players.find((p) => p.id === sp.player.id);
+            if (!fullPlayer) return null;
+
+            return {
+              player: fullPlayer,
+              position: sp.position,
+            };
+          })
+          .filter((v): v is NonNullable<typeof v> => !!v)
+      : [];
+
+  const mappedInitialTrainers =
+    mode === "edit" && initialSquad
+      ? trainers.filter((t) => initialSquad.trainers.some((st) => st.id === t.id))
+      : [];
+  console.log("initialSquad.squadPlayers", initialSquad?.squadPlayers);
+  console.log("players", players);
+  console.log("mappedInitialPlayers", mappedInitialPlayers);
 
   const [squad, setSquad] = useState<SquadState>({
-    players: [],
-    trainers: [],
+    players: mappedInitialPlayers,
+    trainers: mappedInitialTrainers,
   });
 
   const router = useRouter();
@@ -65,8 +100,11 @@ export default function SquadForm({
       date: new Date(data.date).toISOString(),
       squadPlayers,
     };
-    const response = await fetch("/api/admin/squads", {
-      method: "POST",
+
+    const url = mode === "edit" ? `/api/admin/squads/${initialSquad?.id}` : "/api/admin/squads";
+    const method = mode === "edit" ? "PATCH" : "POST";
+    const response = await fetch(url, {
+      method: method,
       headers: {
         "Content-Type": "application/json",
       },
@@ -74,7 +112,9 @@ export default function SquadForm({
     });
 
     if (!response.ok) {
-      throw new Error("Fehler beim Erstellen des Teams");
+      throw new Error(
+        "Fehler beim " + (mode === "edit" ? "Aktualisieren" : "Erstellen") + " des Teams",
+      );
     }
 
     router.push("/admin/squads");
@@ -116,8 +156,10 @@ export default function SquadForm({
               )}
             </Field>
 
-            <Button type="submit">Team erstellen</Button>
-            <Button type="button" variant="outline">
+            <Button type="submit">
+              {mode === "edit" ? "Team aktualisieren" : "Team erstellen"}
+            </Button>
+            <Button type="button" variant="outline" onClick={() => router.back()}>
               Abbrechen
             </Button>
           </form>
