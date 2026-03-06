@@ -17,8 +17,9 @@ import { NestFetch } from "@/lib/nest-api";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Eye, Pencil, Trash2 } from "lucide-react";
+import { Eye, Pencil } from "lucide-react";
 import { Squad } from "@/types";
+import DeleteSquadButton from "./components/delete-squad-button";
 
 export default async function SquadsPage() {
   // Check if the user is authenticated, if not redirect to login page
@@ -83,9 +84,7 @@ export default async function SquadsPage() {
                 </TableCell>
                 <TableCell className="text-center">
                   <Button variant="destructive" asChild>
-                    <Link href={`/admin/squads/${squad.id}/delete`}>
-                      <Trash2 />
-                    </Link>
+                    <DeleteSquadButton id={squad.id} />
                   </Button>
                 </TableCell>
               </TableRow>
