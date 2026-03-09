@@ -20,6 +20,7 @@ import Link from "next/link";
 import { Eye, Pencil } from "lucide-react";
 import { Squad } from "@/types";
 import DeleteSquadButton from "./components/delete-squad-button";
+import { encodeSquadId } from "@/lib/hashids";
 
 export default async function SquadsPage() {
   // Check if the user is authenticated, if not redirect to login page
@@ -70,7 +71,7 @@ export default async function SquadsPage() {
                 <TableCell>{new Date(squad.date).toLocaleDateString("de-CH")}</TableCell>
                 <TableCell className="text-center">
                   <Button variant="outline" asChild>
-                    <Link href={`/squad/${squad.id}`} target="_blank">
+                    <Link href={`/squad/${encodeSquadId(squad.id)}`} target="_blank">
                       <Eye />
                     </Link>
                   </Button>
