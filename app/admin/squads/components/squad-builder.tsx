@@ -10,12 +10,12 @@
  *
  */
 
-import { Player, Trainer } from "@/types";
+import { Player, Trainer, Position, SquadState } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import PlayerCombobox from "@/app/admin/squads/components/player-combobox";
 import { Button } from "@/components/ui/button";
 import { UserPlus, UserMinus } from "lucide-react";
-import { useState, Dispatch, SetActionState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import TrainerCombobox from "@/app/admin/squads/components/trainer-combobox";
 
 export default function SquadBuilder({
@@ -27,7 +27,7 @@ export default function SquadBuilder({
   players: Player[];
   trainers: Trainer[];
   squad: SquadState;
-  setSquad: Dispatch<SetActionState<SquadState>>;
+  setSquad: Dispatch<SetStateAction<SquadState>>;
 }) {
   /**
    * State variables to track whether the combobox for adding a player/trainer is open for each position.

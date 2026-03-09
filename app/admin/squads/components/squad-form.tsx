@@ -37,7 +37,7 @@ export default function SquadForm({
 }: {
   players: Player[];
   trainers: Trainer[];
-  mode: "create" | "edit";
+  mode?: "create" | "edit";
   initialSquad?: Squad;
 }) {
   /**

@@ -6,7 +6,7 @@
 import { NestFetch } from "@/lib/nest-api";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { Player, Trainer } from "@/types";
+import { Player, Trainer, Squad } from "@/types";
 import SquadForm from "@/app/admin/squads/components/squad-form";
 
 export default async function EditSquad({ params }: { params: { id: string } }) {
