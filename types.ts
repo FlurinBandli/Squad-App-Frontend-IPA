@@ -12,15 +12,8 @@ type Squad = {
   name: string;
   description: string;
   date: string;
-  trainers: {
-    id: number;
-  }[];
-  squadPlayers: {
-    player: {
-      id: number;
-    };
-    position: Position;
-  }[];
+  trainers: SquadTrainerInput[];
+  squadPlayers: SquadPlayerInput[];
 };
 
 type Player = {
@@ -35,6 +28,19 @@ type Trainer = {
   firstName: string;
   lastName: string;
   gender: Gender;
+};
+
+type SquadResponse = {
+  id: number;
+  name: string;
+  description: string;
+  date: string;
+  trainers: Trainer[];
+  squadPlayers: {
+    id: number;
+    position: Position;
+    player: Player;
+  }[];
 };
 
 /**
@@ -82,4 +88,5 @@ export type {
   SquadState,
   SquadPlayerInput,
   SquadTrainerInput,
+  SquadResponse,
 };
