@@ -12,6 +12,15 @@ type Squad = {
   name: string;
   description: string;
   date: string;
+  trainers: {
+    id: number;
+  }[];
+  squadPlayers: {
+    player: {
+      id: number;
+    };
+    position: Position;
+  }[];
 };
 
 type Player = {
