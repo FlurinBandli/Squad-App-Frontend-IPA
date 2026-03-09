@@ -6,7 +6,7 @@
  * The form uses React Hook Form with Zod for validation and submits the data to the backend API.
  */
 
-import { Player, SquadState, Trainer, SquadPlayerInput, Squad } from "@/types";
+import { Player, SquadState, Trainer, SquadPlayerInput, Squad, SquadPayload } from "@/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -16,7 +16,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import SquadBuilder from "@/app/admin/squads/components/squad-builder";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+import { createSquadAction, updateSquadAction } from "@/app/admin/squads/actions";
 
 /**
  * Zod schema for validating the squad form inputs.
@@ -83,8 +84,6 @@ export default function SquadForm({
     trainers: mappedInitialTrainers,
   });
 
-  const router = useRouter();
-
   async function onSubmit(data: z.infer<typeof formSchema>) {
     const squadPlayers: SquadPlayerInput[] = squad.players.map((sp) => ({
       player: {
@@ -93,7 +92,7 @@ export default function SquadForm({
       position: sp.position,
     }));
 
-    const payload = {
+    const payload: SquadPayload = {
       trainers: squad.trainers.map((t) => ({ id: t.id })),
       name: data.name,
       description: data.description,
@@ -101,24 +100,17 @@ export default function SquadForm({
       squadPlayers,
     };
 
-    const url = mode === "edit" ? `/api/admin/squads/${initialSquad?.id}` : "/api/admin/squads";
-    const method = mode === "edit" ? "PATCH" : "POST";
-    const response = await fetch(url, {
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    const response =
+      mode === "edit" && initialSquad
+        ? await updateSquadAction(initialSquad.id, payload)
+        : await createSquadAction(payload);
 
-    if (!response.ok) {
+    if (!response.success) {
       throw new Error(
         "Fehler beim " + (mode === "edit" ? "Aktualisieren" : "Erstellen") + " des Teams",
       );
     }
-
-    router.push("/admin/squads");
-    router.refresh();
+    redirect("/admin/squads");
   }
 
   return (
@@ -159,7 +151,7 @@ export default function SquadForm({
             <Button type="submit">
               {mode === "edit" ? "Team aktualisieren" : "Team erstellen"}
             </Button>
-            <Button type="button" variant="outline" onClick={() => router.back()}>
+            <Button type="button" variant="outline" onClick={() => redirect("/admin/squads")}>
               Abbrechen
             </Button>
           </form>

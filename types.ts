@@ -78,6 +78,14 @@ type SquadTrainerInput = {
   id: number;
 };
 
+type SquadPayload = {
+  name: string;
+  description: string;
+  date: string;
+  trainers: SquadTrainerInput[];
+  squadPlayers: SquadPlayerInput[];
+};
+
 export type {
   Gender,
   Position,
@@ -89,4 +97,5 @@ export type {
   SquadPlayerInput,
   SquadTrainerInput,
   SquadResponse,
+  SquadPayload,
 };

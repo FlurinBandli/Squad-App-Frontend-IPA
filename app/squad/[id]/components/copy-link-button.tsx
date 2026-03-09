@@ -5,7 +5,7 @@
  * When the button is clicked, it uses the Clipboard API to write the current URL to the user's clipboard and shows a success toast notification.
  */
 
-import { ClipboardCopy } from "lucide-react";
+import { Copy } from "lucide-react";
 import { toast } from "sonner";
 
 export default function CopyLinkButton() {
@@ -19,7 +19,7 @@ export default function CopyLinkButton() {
 
   return (
     <div className="flex flex-row gap-2 items-center cursor-pointer" onClick={handleCopy}>
-      <ClipboardCopy size={32} />
+      <Copy size={32} />
       <span>Link kopieren</span>
     </div>
   );
