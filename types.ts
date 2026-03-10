@@ -86,6 +86,18 @@ type SquadPayload = {
   squadPlayers: SquadPlayerInput[];
 };
 
+type PlayerPayload = {
+  firstName: string;
+  lastName: string;
+  gender: Gender;
+};
+
+type TrainerPayload = {
+  firstName: string;
+  lastName: string;
+  gender: Gender;
+};
+
 export type {
   Gender,
   Position,
@@ -98,4 +110,6 @@ export type {
   SquadTrainerInput,
   SquadResponse,
   SquadPayload,
+  PlayerPayload,
+  TrainerPayload,
 };

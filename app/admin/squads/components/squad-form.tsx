@@ -75,9 +75,6 @@ export default function SquadForm({
     mode === "edit" && initialSquad
       ? trainers.filter((t) => initialSquad.trainers.some((st) => st.id === t.id))
       : [];
-  console.log("initialSquad.squadPlayers", initialSquad?.squadPlayers);
-  console.log("players", players);
-  console.log("mappedInitialPlayers", mappedInitialPlayers);
 
   const [squad, setSquad] = useState<SquadState>({
     players: mappedInitialPlayers,
