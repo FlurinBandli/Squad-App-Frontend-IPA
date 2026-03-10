@@ -84,9 +84,7 @@ export default async function SquadsPage() {
                   </Button>
                 </TableCell>
                 <TableCell className="text-center">
-                  <Button variant="destructive" asChild>
-                    <DeleteSquadButton id={squad.id} />
-                  </Button>
+                  <DeleteSquadButton id={squad.id} />
                 </TableCell>
               </TableRow>
             ))

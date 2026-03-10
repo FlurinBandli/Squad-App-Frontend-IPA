@@ -1,17 +1,15 @@
+/**
+ * This is the main page for managing players in the admin panel.
+ *  It checks for user authentication, fetches all players from the backend API,
+ *  and renders the PlayersClient component to display the list of players.
+ * If the backend is unreachable, it shows an error message.
+ */
+
 import { auth } from "@/auth";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { NestFetch } from "@/lib/nest-api";
-import { Pencil, Trash2 } from "lucide-react";
 import { redirect } from "next/navigation";
 import { Player } from "@/types";
+import PlayersClient from "@/app/admin/players/components/players-client";
 
 export default async function Players() {
   // Check if the user is authenticated, if not redirect to login page
@@ -28,45 +26,7 @@ export default async function Players() {
 
   return (
     <div className="p-4">
-      <Button className="flex justify-center mb-4">Neuen Spieler erstellen</Button>
-
-      {/* Table displaying the list of players with options to edit or delete each player */}
-      <Table className="w-full">
-        <TableHeader>
-          <TableRow>
-            <TableHead>Vorname</TableHead>
-            <TableHead>Nachname</TableHead>
-            <TableHead>Geschlecht</TableHead>
-            <TableHead className="text-center">Bearbeiten</TableHead>
-            <TableHead className="text-center">Löschen</TableHead>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {players.length === 0 ? (
-            <TableRow>
-              <TableCell colSpan={5} className="text-center py-6 text-muted-foreground">
-                Keine Spieler gefunden.
-              </TableCell>
-            </TableRow>
-          ) : (
-            players.map((player) => (
-              <TableRow key={player.id}>
-                <TableCell>{player.firstName}</TableCell>
-                <TableCell>{player.lastName}</TableCell>
-                <TableCell>{player.gender}</TableCell>
-
-                <TableCell>
-                  <Pencil />
-                </TableCell>
-                <TableCell>
-                  <Trash2 />
-                </TableCell>
-              </TableRow>
-            ))
-          )}
-        </TableBody>
-      </Table>
+      <PlayersClient players={players} />
     </div>
   );
 }

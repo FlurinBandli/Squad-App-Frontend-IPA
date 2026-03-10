@@ -1,16 +1,17 @@
 "use server";
 
-/**
- * Action function to delete a player.
- * @param id The ID of the player to delete.
- * @returns A promise resolving to the result of the deletion operation.
- */
+/** Action functions for managing players in the admin panel. */
+
 import { auth } from "@/auth";
 import { NestFetch } from "@/lib/nest-api";
 import { PlayerPayload } from "@/types";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+/**
+ * Action function to delete a player.
+ * @param id The ID of the player to delete.
+ */
 export async function deletePlayerAction(id: number) {
   const session = await auth();
   if (!session) redirect("/login");

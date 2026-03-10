@@ -1,15 +1,15 @@
 "use client";
 
 /**
- * Component for rendering a button to delete a squad, with a confirmation dialog.
+ * Component for rendering a button to delete a player, with a confirmation dialog.
  * When the delete button is clicked, an AlertDialog is shown to confirm the action.
- * If the user confirms, the deleteSquadAction is called to perform the deletion,
+ * If the user confirms, the deletePlayerAction is called to perform the deletion,
  * and a toast notification is displayed based on the result.
  */
 
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { deleteSquadAction } from "@/app/admin/squads/actions";
+import { deletePlayerAction } from "@/app/admin/players/actions";
 import { toast } from "sonner";
 import {
   AlertDialog,
@@ -23,9 +23,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-export default function DeleteSquadButton({ id }: { id: number }) {
+export default function DeletePlayerButton({ id }: { id: number }) {
   const handleDelete = async () => {
-    const result = await deleteSquadAction(id);
+    const result = await deletePlayerAction(id);
     if (result.success) {
       toast.success(result.message);
     } else {
@@ -42,7 +42,7 @@ export default function DeleteSquadButton({ id }: { id: number }) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Team wirklich löschen?</AlertDialogTitle>
+          <AlertDialogTitle>Spieler wirklich löschen?</AlertDialogTitle>
           <AlertDialogDescription>
             Diese Aktion kann nicht rückgängig gemacht werden.
           </AlertDialogDescription>
