@@ -31,7 +31,9 @@ export default function TrainerCombobox({
         /**
          * Defines how trainers are displayed as text in the combobox input.
          */
-        itemToStringValue={(trainer: Trainer) => `${trainer.firstName} ${trainer.lastName}`}
+        itemToStringValue={(trainer: Trainer) =>
+          `${trainer.firstName} ${trainer.lastName}`
+        }
       >
         <ComboboxInput placeholder="Trainer auswählen" />
         <ComboboxContent>

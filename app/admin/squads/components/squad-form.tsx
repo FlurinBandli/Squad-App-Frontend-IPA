@@ -6,7 +6,14 @@
  * The form uses React Hook Form with Zod for validation and submits the data to the backend API.
  */
 
-import { Player, SquadState, Trainer, SquadPlayerInput, Squad, SquadPayload } from "@/types";
+import {
+  Player,
+  SquadState,
+  Trainer,
+  SquadPlayerInput,
+  Squad,
+  SquadPayload,
+} from "@/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -17,7 +24,10 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import SquadBuilder from "@/app/admin/squads/components/squad-builder";
 import { redirect } from "next/navigation";
-import { createSquadAction, updateSquadAction } from "@/app/admin/squads/actions";
+import {
+  createSquadAction,
+  updateSquadAction,
+} from "@/app/admin/squads/actions";
 
 /**
  * Zod schema for validating the squad form inputs.
@@ -49,8 +59,10 @@ export default function SquadForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: mode === "edit" && initialSquad ? initialSquad.name : "",
-      description: mode === "edit" && initialSquad ? initialSquad.description : "",
-      date: mode === "edit" && initialSquad ? initialSquad.date.split("T")[0] : "",
+      description:
+        mode === "edit" && initialSquad ? initialSquad.description : "",
+      date:
+        mode === "edit" && initialSquad ? initialSquad.date.split("T")[0] : "",
     },
   });
   /**
@@ -73,7 +85,9 @@ export default function SquadForm({
 
   const mappedInitialTrainers =
     mode === "edit" && initialSquad
-      ? trainers.filter((t) => initialSquad.trainers.some((st) => st.id === t.id))
+      ? trainers.filter((t) =>
+          initialSquad.trainers.some((st) => st.id === t.id)
+        )
       : [];
 
   const [squad, setSquad] = useState<SquadState>({
@@ -104,7 +118,9 @@ export default function SquadForm({
 
     if (!response.success) {
       throw new Error(
-        "Fehler beim " + (mode === "edit" ? "Aktualisieren" : "Erstellen") + " des Teams",
+        "Fehler beim " +
+          (mode === "edit" ? "Aktualisieren" : "Erstellen") +
+          " des Teams"
       );
     }
     redirect("/admin/squads");
@@ -113,7 +129,12 @@ export default function SquadForm({
   return (
     <div className="w-full min-h-screen bg-slate-100 flex items-center justify-center">
       <div className="w-200">
-        <SquadBuilder players={players} trainers={trainers} squad={squad} setSquad={setSquad} />
+        <SquadBuilder
+          players={players}
+          trainers={trainers}
+          squad={squad}
+          setSquad={setSquad}
+        />
       </div>
       <Card className="w-60 max-w-md bg-white shadow-lg">
         <CardHeader className="flex flex-row items-center justify-between">
@@ -125,7 +146,9 @@ export default function SquadForm({
               <FieldLabel>Teamname</FieldLabel>
               <Input autoFocus {...form.register("name")} />
               {form.formState.errors.name && (
-                <p className="text-sm text-red-500">{form.formState.errors.name.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.name.message}
+                </p>
               )}
             </Field>
 
@@ -133,7 +156,9 @@ export default function SquadForm({
               <FieldLabel>Beschreibung</FieldLabel>
               <Input {...form.register("description")} />
               {form.formState.errors.description && (
-                <p className="text-sm text-red-500">{form.formState.errors.description.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.description.message}
+                </p>
               )}
             </Field>
 
@@ -141,14 +166,20 @@ export default function SquadForm({
               <FieldLabel>Datum</FieldLabel>
               <Input type="date" {...form.register("date")} />
               {form.formState.errors.date && (
-                <p className="text-sm text-red-500">{form.formState.errors.date.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.date.message}
+                </p>
               )}
             </Field>
 
             <Button type="submit">
               {mode === "edit" ? "Team aktualisieren" : "Team erstellen"}
             </Button>
-            <Button type="button" variant="outline" onClick={() => redirect("/admin/squads")}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => redirect("/admin/squads")}
+            >
               Abbrechen
             </Button>
           </form>

@@ -18,7 +18,10 @@ export default function CopyLinkButton() {
   }
 
   return (
-    <div className="flex flex-row gap-2 items-center cursor-pointer" onClick={handleCopy}>
+    <div
+      className="flex flex-row gap-2 items-center cursor-pointer"
+      onClick={handleCopy}
+    >
       <Copy size={32} />
       <span>Link kopieren</span>
     </div>

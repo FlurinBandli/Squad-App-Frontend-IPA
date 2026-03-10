@@ -74,23 +74,34 @@ export default function LoginForm() {
       <Card className="w-full max-w-md bg-white shadow-lg">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Admin Login</CardTitle>
-          <Image src="/fc-zh-leutschenbach-logo.png" alt="Logo" width={60} height={60} />
+          <Image
+            src="/fc-zh-leutschenbach-logo.png"
+            alt="Logo"
+            width={60}
+            height={60}
+          />
         </CardHeader>
         <CardContent>
-          {loginError && <p className="text-sm mb-1 text-red-600">{loginError}</p>}
+          {loginError && (
+            <p className="text-sm mb-1 text-red-600">{loginError}</p>
+          )}
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <Field className="mb-2">
               <FieldLabel>Benutzername</FieldLabel>
               <Input autoFocus {...form.register("username")} />
               {form.formState.errors.username && (
-                <p className="text-sm text-red-600">{form.formState.errors.username.message}</p>
+                <p className="text-sm text-red-600">
+                  {form.formState.errors.username.message}
+                </p>
               )}
             </Field>
             <Field className="mb-4">
               <FieldLabel>Passwort</FieldLabel>
               <Input type="password" {...form.register("password")} />
               {form.formState.errors.password && (
-                <p className="text-sm text-red-600">{form.formState.errors.password.message}</p>
+                <p className="text-sm text-red-600">
+                  {form.formState.errors.password.message}
+                </p>
               )}
             </Field>
             <Button className="w-full" type="submit">

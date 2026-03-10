@@ -22,7 +22,10 @@ import { Field, FieldLabel } from "@/components/ui/field";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Player } from "@/types";
-import { createPlayerAction, updatePlayerAction } from "@/app/admin/players/actions";
+import {
+  createPlayerAction,
+  updatePlayerAction,
+} from "@/app/admin/players/actions";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -75,7 +78,9 @@ export default function PlayerForm({
 
     if (!response.success) {
       throw new Error(
-        "Fehler beim " + (mode === "edit" ? "Aktualisieren" : "Erstellen") + " des Spielers",
+        "Fehler beim " +
+          (mode === "edit" ? "Aktualisieren" : "Erstellen") +
+          " des Spielers"
       );
     }
     setOpen(false);
@@ -89,7 +94,9 @@ export default function PlayerForm({
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>{mode === "edit" ? "Spieler bearbeiten" : "Spieler erstellen"}</SheetTitle>
+            <SheetTitle>
+              {mode === "edit" ? "Spieler bearbeiten" : "Spieler erstellen"}
+            </SheetTitle>
           </SheetHeader>
 
           <form onSubmit={form.handleSubmit(onSubmit)} className="p-4">
@@ -97,7 +104,9 @@ export default function PlayerForm({
               <FieldLabel>Vorname</FieldLabel>
               <Input autoFocus {...form.register("firstName")} />
               {form.formState.errors.firstName && (
-                <p className="text-sm text-red-500">{form.formState.errors.firstName.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.firstName.message}
+                </p>
               )}
             </Field>
 
@@ -105,7 +114,9 @@ export default function PlayerForm({
               <FieldLabel>Nachname</FieldLabel>
               <Input {...form.register("lastName")} />
               {form.formState.errors.lastName && (
-                <p className="text-sm text-red-500">{form.formState.errors.lastName.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.lastName.message}
+                </p>
               )}
             </Field>
 

@@ -4,7 +4,7 @@
  * Includes a logout button at the bottom of the sidebar.
  */
 
-import LogoutButton from "@/components/auth/logout-button";
+import LogoutButton from "@/app/admin/components/logout-button";
 import { Volleyball, Users, UserStar } from "lucide-react";
 import Link from "next/link";
 

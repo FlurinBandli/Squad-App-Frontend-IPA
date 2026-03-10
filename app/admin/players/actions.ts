@@ -79,6 +79,9 @@ export async function updatePlayerAction(id: number, payload: PlayerPayload) {
     return { success: true, message: "Spieler erfolgreich aktualisiert", data };
   } catch (error) {
     console.log(error);
-    return { success: false, message: "Fehler beim Aktualisieren des Spielers" };
+    return {
+      success: false,
+      message: "Fehler beim Aktualisieren des Spielers",
+    };
   }
 }

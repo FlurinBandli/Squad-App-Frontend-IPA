@@ -39,7 +39,10 @@ export async function GetNestToken(): Promise<string> {
  * @param endpoint The specific API endpoint to call (e.g., "api/squad").
  * @param init Optional RequestInit object to customize the fetch request (e.g., method, body).
  */
-export async function NestFetch<T>(endpoint: string, init: RequestInit = {}): Promise<T> {
+export async function NestFetch<T>(
+  endpoint: string,
+  init: RequestInit = {}
+): Promise<T> {
   // Get a valid bearer token for authentication
   const token = await GetNestToken();
 
@@ -55,7 +58,9 @@ export async function NestFetch<T>(endpoint: string, init: RequestInit = {}): Pr
 
   // Throw an error if the request fails
   if (!response.ok) {
-    throw new Error(`Fehler bei der Anfrage an die Nest API: ${response.statusText}`);
+    throw new Error(
+      `Fehler bei der Anfrage an die Nest API: ${response.statusText}`
+    );
   }
 
   const text = await response.text();

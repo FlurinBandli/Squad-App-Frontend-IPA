@@ -5,10 +5,14 @@
  */
 
 import { SidebarProvider } from "@/components/ui/sidebar";
-import AdminSidebar from "@/components/admin/admin-sidebar";
-import AdminHeader from "@/components/admin/admin-header";
+import AdminSidebar from "@/app/admin/components/admin-sidebar";
+import AdminHeader from "@/app/admin/components/admin-header";
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">

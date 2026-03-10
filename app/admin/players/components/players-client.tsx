@@ -23,7 +23,9 @@ import { useState } from "react";
 export default function PlayersClient({ players }: { players: Player[] }) {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<"create" | "edit">("create");
-  const [selectedPlayer, setSelectedPlayer] = useState<Player | undefined>(undefined);
+  const [selectedPlayer, setSelectedPlayer] = useState<Player | undefined>(
+    undefined
+  );
 
   function handleCreate() {
     setMode("create");
@@ -39,7 +41,10 @@ export default function PlayersClient({ players }: { players: Player[] }) {
 
   return (
     <div>
-      <Button className="flex justify-center w-full mb-4" onClick={handleCreate}>
+      <Button
+        className="flex justify-center w-full mb-4"
+        onClick={handleCreate}
+      >
         Neuen Spieler erstellen
       </Button>
 
@@ -58,7 +63,10 @@ export default function PlayersClient({ players }: { players: Player[] }) {
         <TableBody>
           {players.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={5} className="text-center py-6 text-muted-foreground">
+              <TableCell
+                colSpan={5}
+                className="text-center py-6 text-muted-foreground"
+              >
                 Keine Spieler gefunden.
               </TableCell>
             </TableRow>
@@ -83,7 +91,12 @@ export default function PlayersClient({ players }: { players: Player[] }) {
         </TableBody>
       </Table>
 
-      <PlayerForm open={open} setOpen={setOpen} player={selectedPlayer} mode={mode} />
+      <PlayerForm
+        open={open}
+        setOpen={setOpen}
+        player={selectedPlayer}
+        mode={mode}
+      />
     </div>
   );
 }

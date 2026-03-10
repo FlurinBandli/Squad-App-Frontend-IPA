@@ -9,7 +9,11 @@ import CopyLinkButton from "@/app/squad/[id]/components/copy-link-button";
 import { UserRound } from "lucide-react";
 import { decodeSquadId } from "@/lib/hashids";
 
-export default async function ViewSquad({ params }: { params: Promise<{ id: string }> }) {
+export default async function ViewSquad({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
 
   // Decode the hashid from the URL to obtain teh actual database ID
@@ -19,7 +23,9 @@ export default async function ViewSquad({ params }: { params: Promise<{ id: stri
 
   try {
     // Fetch the squad data from the NestJS backend API
-    const response = await fetch(`${process.env.NEST_API_URL}/api/squad/${decodedId}`);
+    const response = await fetch(
+      `${process.env.NEST_API_URL}/api/squad/${decodedId}`
+    );
     squad = await response.json();
   } catch {
     // If the API call fails, display an error message to the user
@@ -55,7 +61,9 @@ export default async function ViewSquad({ params }: { params: Promise<{ id: stri
           <div className="flex flex-col justify-between py-9 h-full">
             {fieldPositions.map((position) => {
               // Filter the squad players based on their position to display them in the correct area of the football pitch
-              const players = squad.squadPlayers.filter((sp) => sp.position === position.key);
+              const players = squad.squadPlayers.filter(
+                (sp) => sp.position === position.key
+              );
               return (
                 <div key={position.key}>
                   <span className="flex justify-center text-2xl font-semibold text-white tracking-wide drop-shadow-lg pb-2">

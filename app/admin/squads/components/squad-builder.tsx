@@ -43,7 +43,9 @@ export default function SquadBuilder({
   const selectedPlayerIds = squad.players.map((sp) => sp.player.id);
 
   const playersByPosition = (position: Position) =>
-    squad.players.filter((sp) => sp.position === position).map((sp) => sp.player);
+    squad.players
+      .filter((sp) => sp.position === position)
+      .map((sp) => sp.player);
 
   const addPlayerToPosition = (player: Player, position: Position) => {
     setSquad((prev) => {
@@ -100,7 +102,10 @@ export default function SquadBuilder({
 
             <div className="flex flex-row justify-center gap-2">
               {playersByPosition("Striker").map((player) => (
-                <div key={player.id} className="flex flex-col w-32 items-center text-center gap-2">
+                <div
+                  key={player.id}
+                  className="flex flex-col w-32 items-center text-center gap-2"
+                >
                   <Button
                     type="button"
                     size="icon"
@@ -117,7 +122,9 @@ export default function SquadBuilder({
             <div className="flex justify-center">
               {addingStriker && (
                 <PlayerCombobox
-                  players={players.filter((p) => !selectedPlayerIds.includes(p.id))}
+                  players={players.filter(
+                    (p) => !selectedPlayerIds.includes(p.id)
+                  )}
                   onSelect={(player) => {
                     addPlayerToPosition(player, "Striker");
                     setAddingStriker(false);
@@ -137,7 +144,10 @@ export default function SquadBuilder({
 
             <div className="flex flex-row justify-center gap-2">
               {playersByPosition("Midfielder").map((player) => (
-                <div key={player.id} className="flex flex-col w-32 items-center text-center gap-2">
+                <div
+                  key={player.id}
+                  className="flex flex-col w-32 items-center text-center gap-2"
+                >
                   <Button
                     type="button"
                     size="icon"
@@ -154,7 +164,9 @@ export default function SquadBuilder({
             <div className="flex justify-center">
               {addingMidfielder && (
                 <PlayerCombobox
-                  players={players.filter((p) => !selectedPlayerIds.includes(p.id))}
+                  players={players.filter(
+                    (p) => !selectedPlayerIds.includes(p.id)
+                  )}
                   onSelect={(player) => {
                     addPlayerToPosition(player, "Midfielder");
                     setAddingMidfielder(false);
@@ -174,7 +186,10 @@ export default function SquadBuilder({
 
             <div className="flex flex-row justify-center gap-2">
               {playersByPosition("Defender").map((player) => (
-                <div key={player.id} className="flex flex-col w-32 items-center text-center gap-2">
+                <div
+                  key={player.id}
+                  className="flex flex-col w-32 items-center text-center gap-2"
+                >
                   <Button
                     type="button"
                     size="icon"
@@ -191,7 +206,9 @@ export default function SquadBuilder({
             <div className="flex justify-center">
               {addingDefender && (
                 <PlayerCombobox
-                  players={players.filter((p) => !selectedPlayerIds.includes(p.id))}
+                  players={players.filter(
+                    (p) => !selectedPlayerIds.includes(p.id)
+                  )}
                   onSelect={(player) => {
                     addPlayerToPosition(player, "Defender");
                     setAddingDefender(false);
@@ -211,7 +228,10 @@ export default function SquadBuilder({
 
             <div className="flex flex-row justify-center gap-2">
               {playersByPosition("Goalkeeper").map((player) => (
-                <div key={player.id} className="flex flex-col w-32 items-center text-center gap-2">
+                <div
+                  key={player.id}
+                  className="flex flex-col w-32 items-center text-center gap-2"
+                >
                   <Button
                     type="button"
                     size="icon"
@@ -228,7 +248,9 @@ export default function SquadBuilder({
             <div className="flex justify-center">
               {addingGoalkeeper && (
                 <PlayerCombobox
-                  players={players.filter((p) => !selectedPlayerIds.includes(p.id))}
+                  players={players.filter(
+                    (p) => !selectedPlayerIds.includes(p.id)
+                  )}
                   onSelect={(player) => {
                     addPlayerToPosition(player, "Goalkeeper");
                     setAddingGoalkeeper(false);
@@ -252,7 +274,10 @@ export default function SquadBuilder({
 
             <div className="flex flex-row justify-center gap-2">
               {squad.trainers.map((trainer) => (
-                <div key={trainer.id} className="flex flex-col w-32 items-center text-center gap-2">
+                <div
+                  key={trainer.id}
+                  className="flex flex-col w-32 items-center text-center gap-2"
+                >
                   <Button
                     type="button"
                     size="icon"
@@ -269,7 +294,9 @@ export default function SquadBuilder({
             <div className="flex justify-center">
               {addingTrainer && (
                 <TrainerCombobox
-                  trainers={trainers.filter((p) => !squad.trainers.some((b) => b.id === p.id))}
+                  trainers={trainers.filter(
+                    (p) => !squad.trainers.some((b) => b.id === p.id)
+                  )}
                   onSelect={(trainer) => {
                     addTrainer(trainer);
                     setAddingTrainer(false);
@@ -289,7 +316,10 @@ export default function SquadBuilder({
 
             <div className="flex flex-row justify-center gap-2">
               {playersByPosition("Backup").map((player) => (
-                <div key={player.id} className="flex flex-col w-32 items-center text-center gap-2">
+                <div
+                  key={player.id}
+                  className="flex flex-col w-32 items-center text-center gap-2"
+                >
                   <Button
                     type="button"
                     size="icon"
@@ -298,6 +328,13 @@ export default function SquadBuilder({
                   >
                     <UserMinus className="h-4 w-4" />
                   </Button>
+                  <PlayerCombobox
+                    players={players}
+                    onSelect={(p) => {
+                      removePlayer(player.id);
+                      addPlayerToPosition(p, "Backup");
+                    }}
+                  />
                   {player.firstName} {player.lastName}
                 </div>
               ))}
@@ -306,7 +343,9 @@ export default function SquadBuilder({
             <div className="flex justify-center">
               {addingBackup && (
                 <PlayerCombobox
-                  players={players.filter((p) => !selectedPlayerIds.includes(p.id))}
+                  players={players.filter(
+                    (p) => !selectedPlayerIds.includes(p.id)
+                  )}
                   onSelect={(player) => {
                     addPlayerToPosition(player, "Backup");
                     setAddingBackup(false);

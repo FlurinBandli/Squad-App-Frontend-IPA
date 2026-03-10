@@ -31,7 +31,9 @@ export default function PlayerCombobox({
         /**
          * Defines how trainers are displayed as text in the combobox input.
          */
-        itemToStringValue={(player: Player) => `${player.firstName} ${player.lastName}`}
+        itemToStringValue={(player: Player) =>
+          `${player.firstName} ${player.lastName}`
+        }
       >
         <ComboboxInput placeholder="Spieler auswählen" />
         <ComboboxContent>

@@ -7,6 +7,7 @@ import Credentials from "next-auth/providers/credentials";
  * with environment variables stored on the server.
  */
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true,
   providers: [
     Credentials({
       name: "Credentials",
@@ -26,7 +27,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         if (!username || !password) return null;
 
-        if (username === credentials?.username && password === credentials?.password) {
+        if (
+          username === credentials?.username &&
+          password === credentials?.password
+        ) {
           return { id: "Admin" };
         }
         return null;

@@ -58,7 +58,10 @@ export default async function SquadsPage() {
         <TableBody>
           {squads.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={7} className="text-center py-6 text-muted-foreground">
+              <TableCell
+                colSpan={7}
+                className="text-center py-6 text-muted-foreground"
+              >
                 Keine Teams gefunden.
               </TableCell>
             </TableRow>
@@ -68,10 +71,15 @@ export default async function SquadsPage() {
                 <TableCell>{squad.id}</TableCell>
                 <TableCell>{squad.name}</TableCell>
                 <TableCell>{squad.description}</TableCell>
-                <TableCell>{new Date(squad.date).toLocaleDateString("de-CH")}</TableCell>
+                <TableCell>
+                  {new Date(squad.date).toLocaleDateString("de-CH")}
+                </TableCell>
                 <TableCell className="text-center">
                   <Button variant="outline" asChild>
-                    <Link href={`/squad/${encodeSquadId(squad.id)}`} target="_blank">
+                    <Link
+                      href={`/squad/${encodeSquadId(squad.id)}`}
+                      target="_blank"
+                    >
                       <Eye />
                     </Link>
                   </Button>

@@ -9,7 +9,11 @@ import { redirect } from "next/navigation";
 import { Player, Trainer, Squad } from "@/types";
 import SquadForm from "@/app/admin/squads/components/squad-form";
 
-export default async function EditSquad({ params }: { params: { id: string } }) {
+export default async function EditSquad({
+  params,
+}: {
+  params: { id: string };
+}) {
   /**
    * Ensure the user is authenticated before accessing the admin page.
    * Unauthenticated users are redirected to the login page.
@@ -51,5 +55,12 @@ export default async function EditSquad({ params }: { params: { id: string } }) 
   /**
    * Render the squad creation form with the fetched data.
    */
-  return <SquadForm players={players} trainers={trainers} mode="edit" initialSquad={squad} />;
+  return (
+    <SquadForm
+      players={players}
+      trainers={trainers}
+      mode="edit"
+      initialSquad={squad}
+    />
+  );
 }
