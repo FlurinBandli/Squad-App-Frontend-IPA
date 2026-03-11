@@ -1,9 +1,9 @@
 "use client";
 
 /**
- * PlayersClient component responsible for rendering the list of players in the admin panel.
- * It displays a table of players with options to edit or delete each player.
- * The component also includes a button to create a new player, which opens the PlayerForm component.
+ * TrainersClient component responsible for rendering the list of trainers in the admin panel.
+ * It displays a table of trainers with options to edit or delete each trainer.
+ * The component also includes a button to create a new trainer, which opens the TrainerForm component.
  */
 import {
   Table,
@@ -15,27 +15,28 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
-import { Player } from "@/types";
-import DeletePlayerButton from "@/app/admin/players/components/delete-player-button";
-import PlayerForm from "@/app/admin/players/components/player-form";
-import { useState } from "react";
+import { Trainer } from "@/types";
+import DeleteTrainerButton from "@/app/admin/trainers/components/delete-trainer-button";
 
-export default function PlayersClient({ players }: { players: Player[] }) {
+import { useState } from "react";
+import TrainerForm from "@/app/admin/trainers/components/trainer-form";
+
+export default function TrainersClient({ trainers }: { trainers: Trainer[] }) {
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<"create" | "edit">("create");
-  const [selectedPlayer, setSelectedPlayer] = useState<Player | undefined>(
+  const [selectedTrainer, setSelectedTrainer] = useState<Trainer | undefined>(
     undefined
   );
 
   function handleCreate() {
     setMode("create");
-    setSelectedPlayer(undefined);
+    setSelectedTrainer(undefined);
     setOpen(true);
   }
 
-  function handleEdit(player: Player) {
+  function handleEdit(trainer: Trainer) {
     setMode("edit");
-    setSelectedPlayer(player);
+    setSelectedTrainer(trainer);
     setOpen(true);
   }
 
@@ -45,10 +46,10 @@ export default function PlayersClient({ players }: { players: Player[] }) {
         className="flex justify-center w-full mb-4 cursor-pointer"
         onClick={handleCreate}
       >
-        Neuen Spieler erstellen
+        Neuen Trainer erstellen
       </Button>
 
-      {/* Table displaying the list of players with options to edit or delete each player */}
+      {/* Table displaying the list of trainers with options to edit or delete each trainer */}
       <Table className="w-full">
         <TableHeader>
           <TableRow>
@@ -61,33 +62,33 @@ export default function PlayersClient({ players }: { players: Player[] }) {
         </TableHeader>
 
         <TableBody>
-          {players.length === 0 ? (
+          {trainers.length === 0 ? (
             <TableRow>
               <TableCell
                 colSpan={5}
                 className="text-center py-6 text-muted-foreground"
               >
-                Keine Spieler gefunden.
+                Keine Trainer gefunden.
               </TableCell>
             </TableRow>
           ) : (
-            players.map((player) => (
-              <TableRow key={player.id}>
-                <TableCell>{player.firstName}</TableCell>
-                <TableCell>{player.lastName}</TableCell>
-                <TableCell>{player.gender}</TableCell>
+            trainers.map((trainer) => (
+              <TableRow key={trainer.id}>
+                <TableCell>{trainer.firstName}</TableCell>
+                <TableCell>{trainer.lastName}</TableCell>
+                <TableCell>{trainer.gender}</TableCell>
 
                 <TableCell>
                   <Button
                     type="button"
                     className="cursor-pointer"
-                    onClick={() => handleEdit(player)}
+                    onClick={() => handleEdit(trainer)}
                   >
                     <Pencil />
                   </Button>
                 </TableCell>
                 <TableCell>
-                  <DeletePlayerButton id={player.id} />
+                  <DeleteTrainerButton id={trainer.id} />
                 </TableCell>
               </TableRow>
             ))
@@ -95,10 +96,10 @@ export default function PlayersClient({ players }: { players: Player[] }) {
         </TableBody>
       </Table>
 
-      <PlayerForm
+      <TrainerForm
         open={open}
         setOpen={setOpen}
-        player={selectedPlayer}
+        trainer={selectedTrainer}
         mode={mode}
       />
     </div>

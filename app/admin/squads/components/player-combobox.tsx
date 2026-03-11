@@ -19,35 +19,41 @@ import { Player } from "@/types";
 
 export default function PlayerCombobox({
   players,
+  value,
   onSelect,
 }: {
   players: Player[];
+  value?: Player;
   onSelect: (player: Player) => void;
 }) {
   return (
     <div className="w-40">
       <Combobox
         items={players}
+        value={value}
+        onValueChange={(player) => player && onSelect(player)}
         /**
-         * Defines how trainers are displayed as text in the combobox input.
+         * Defines how players are displayed as text in the combobox input.
          */
         itemToStringValue={(player: Player) =>
           `${player.firstName} ${player.lastName}`
         }
       >
-        <ComboboxInput placeholder="Spieler auswählen" />
+        <ComboboxInput
+          placeholder="Spieler auswählen"
+          value={value ? `${value.firstName} ${value.lastName}` : ""}
+        />
         <ComboboxContent>
           <ComboboxEmpty>Keine Spieler gefunden</ComboboxEmpty>
           <ComboboxList>
             {(player: Player) => (
               <ComboboxItem
                 key={player.id}
-                value={`${player.firstName} ${player.lastName}`}
+                value={player}
                 /**
-                 * When a trainer is clicked, pass the trainer object
+                 * When a player is clicked, pass the player object
                  * to the parent component.
                  */
-                onClick={() => onSelect(player)}
               >
                 {player.firstName} {player.lastName}
               </ComboboxItem>
