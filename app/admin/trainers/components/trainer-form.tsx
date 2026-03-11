@@ -1,9 +1,9 @@
 "use client";
 
 /**
- * PlayerForm component responsible for creating and editing players.
+ * TrainerForm component responsible for creating and editing trainers.
  * It renders a form inside a shadcn/ui Sheet component and uses React Hook Form with Zod validation.
- * Depending on the mode it calls either createPlayerAction or updatePlayerAction.
+ * Depending on the mode it calls either createTrainerAction or updateTrainerAction.
  */
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,11 +21,11 @@ import { z } from "zod";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Player } from "@/types";
+import { Trainer } from "@/types";
 import {
-  createPlayerAction,
-  updatePlayerAction,
-} from "@/app/admin/players/actions";
+  createTrainerAction,
+  updateTrainerAction,
+} from "@/app/admin/trainers/actions";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -35,16 +35,16 @@ const formSchema = z.object({
   gender: z.enum(["Male", "Female", "Other"]),
 });
 
-export default function PlayerForm({
+export default function TrainerForm({
   open,
   setOpen,
   mode = "create",
-  player,
+  trainer,
 }: {
   open: boolean;
   setOpen: (open: boolean) => void;
   mode?: "create" | "edit";
-  player?: Player;
+  trainer?: Trainer;
 }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,12 +58,12 @@ export default function PlayerForm({
   useEffect(() => {
     if (open) {
       form.reset({
-        firstName: mode === "edit" && player ? player.firstName : "",
-        lastName: mode === "edit" && player ? player.lastName : "",
-        gender: mode === "edit" && player ? player.gender : "Other",
+        firstName: mode === "edit" && trainer ? trainer.firstName : "",
+        lastName: mode === "edit" && trainer ? trainer.lastName : "",
+        gender: mode === "edit" && trainer ? trainer.gender : "Other",
       });
     }
-  }, [open, mode, player, form]);
+  }, [open, mode, trainer, form]);
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     const payload = {
@@ -72,15 +72,15 @@ export default function PlayerForm({
       gender: data.gender,
     };
     const response =
-      mode === "edit" && player
-        ? await updatePlayerAction(player.id, payload)
-        : await createPlayerAction(payload);
+      mode === "edit" && trainer
+        ? await updateTrainerAction(trainer.id, payload)
+        : await createTrainerAction(payload);
 
     if (!response.success) {
       throw new Error(
         "Fehler beim " +
           (mode === "edit" ? "Aktualisieren" : "Erstellen") +
-          " des Spielers"
+          " des Trainers"
       );
     }
     setOpen(false);
@@ -95,7 +95,7 @@ export default function PlayerForm({
         <SheetContent>
           <SheetHeader>
             <SheetTitle>
-              {mode === "edit" ? "Spieler bearbeiten" : "Spieler erstellen"}
+              {mode === "edit" ? "Trainer bearbeiten" : "Trainer erstellen"}
             </SheetTitle>
           </SheetHeader>
 
@@ -132,7 +132,7 @@ export default function PlayerForm({
                     onValueChange={field.onChange}
                     className="flex w-full gap-4"
                   >
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-1 ">
                       <RadioGroupItem
                         value="Male"
                         id="male"

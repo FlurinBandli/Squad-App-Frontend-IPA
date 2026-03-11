@@ -114,7 +114,17 @@ export default function SquadBuilder({
                   >
                     <UserMinus className="h-4 w-4" />
                   </Button>
-                  {player.firstName} {player.lastName}
+                  <PlayerCombobox
+                    players={players.filter(
+                      (p) =>
+                        p.id === player.id || !selectedPlayerIds.includes(p.id)
+                    )}
+                    value={player}
+                    onSelect={(p) => {
+                      removePlayer(player.id);
+                      addPlayerToPosition(p, "Striker");
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -156,7 +166,17 @@ export default function SquadBuilder({
                   >
                     <UserMinus className="h-4 w-4" />
                   </Button>
-                  {player.firstName} {player.lastName}
+                  <PlayerCombobox
+                    players={players.filter(
+                      (p) =>
+                        p.id === player.id || !selectedPlayerIds.includes(p.id)
+                    )}
+                    value={player}
+                    onSelect={(p) => {
+                      removePlayer(player.id);
+                      addPlayerToPosition(p, "Midfielder");
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -198,7 +218,17 @@ export default function SquadBuilder({
                   >
                     <UserMinus className="h-4 w-4" />
                   </Button>
-                  {player.firstName} {player.lastName}
+                  <PlayerCombobox
+                    players={players.filter(
+                      (p) =>
+                        p.id === player.id || !selectedPlayerIds.includes(p.id)
+                    )}
+                    value={player}
+                    onSelect={(p) => {
+                      removePlayer(player.id);
+                      addPlayerToPosition(p, "Defender");
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -240,7 +270,17 @@ export default function SquadBuilder({
                   >
                     <UserMinus className="h-4 w-4" />
                   </Button>
-                  {player.firstName} {player.lastName}
+                  <PlayerCombobox
+                    players={players.filter(
+                      (p) =>
+                        p.id === player.id || !selectedPlayerIds.includes(p.id)
+                    )}
+                    value={player}
+                    onSelect={(p) => {
+                      removePlayer(player.id);
+                      addPlayerToPosition(p, "Goalkeeper");
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -286,7 +326,18 @@ export default function SquadBuilder({
                   >
                     <UserMinus className="h-4 w-4" />
                   </Button>
-                  {trainer.firstName} {trainer.lastName}
+                  <TrainerCombobox
+                    trainers={trainers.filter(
+                      (t) =>
+                        t.id === trainer.id ||
+                        !squad.trainers.some((bt) => bt.id === t.id)
+                    )}
+                    value={trainer}
+                    onSelect={(t) => {
+                      removeTrainer(trainer.id);
+                      addTrainer(t);
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -295,7 +346,7 @@ export default function SquadBuilder({
               {addingTrainer && (
                 <TrainerCombobox
                   trainers={trainers.filter(
-                    (p) => !squad.trainers.some((b) => b.id === p.id)
+                    (t) => !squad.trainers.some((b) => b.id === t.id)
                   )}
                   onSelect={(trainer) => {
                     addTrainer(trainer);
@@ -329,13 +380,16 @@ export default function SquadBuilder({
                     <UserMinus className="h-4 w-4" />
                   </Button>
                   <PlayerCombobox
-                    players={players}
+                    players={players.filter(
+                      (p) =>
+                        p.id === player.id || !selectedPlayerIds.includes(p.id)
+                    )}
+                    value={player}
                     onSelect={(p) => {
                       removePlayer(player.id);
                       addPlayerToPosition(p, "Backup");
                     }}
                   />
-                  {player.firstName} {player.lastName}
                 </div>
               ))}
             </div>

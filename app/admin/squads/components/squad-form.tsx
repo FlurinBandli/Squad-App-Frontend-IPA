@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import SquadBuilder from "@/app/admin/squads/components/squad-builder";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   createSquadAction,
   updateSquadAction,
@@ -95,6 +95,8 @@ export default function SquadForm({
     trainers: mappedInitialTrainers,
   });
 
+  const router = useRouter();
+
   async function onSubmit(data: z.infer<typeof formSchema>) {
     const squadPlayers: SquadPlayerInput[] = squad.players.map((sp) => ({
       player: {
@@ -123,12 +125,12 @@ export default function SquadForm({
           " des Teams"
       );
     }
-    redirect("/admin/squads");
+    router.push("/admin/squads");
   }
 
   return (
-    <div className="w-full min-h-screen bg-slate-100 flex items-center justify-center">
-      <div className="w-200">
+    <div className="w-full min-h-screen bg-slate-100 flex  gap-5 p-4">
+      <div className="w-3/4">
         <SquadBuilder
           players={players}
           trainers={trainers}
@@ -136,8 +138,8 @@ export default function SquadForm({
           setSquad={setSquad}
         />
       </div>
-      <Card className="w-60 max-w-md bg-white shadow-lg">
-        <CardHeader className="flex flex-row items-center justify-between">
+      <Card className="w-1/4 bg-white shadow-lg ">
+        <CardHeader className="flex flex-row items-center justify-center p-4">
           <CardTitle>Team Infos</CardTitle>
         </CardHeader>
         <CardContent>
@@ -171,17 +173,18 @@ export default function SquadForm({
                 </p>
               )}
             </Field>
-
-            <Button type="submit">
-              {mode === "edit" ? "Team aktualisieren" : "Team erstellen"}
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => redirect("/admin/squads")}
-            >
-              Abbrechen
-            </Button>
+            <div className="flex gap-2">
+              <Button type="submit">
+                {mode === "edit" ? "Team aktualisieren" : "Team erstellen"}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => router.push("/admin/squads")}
+              >
+                Abbrechen
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>

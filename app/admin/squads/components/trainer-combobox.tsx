@@ -19,15 +19,19 @@ import { Trainer } from "@/types";
 
 export default function TrainerCombobox({
   trainers,
+  value,
   onSelect,
 }: {
   trainers: Trainer[];
+  value?: Trainer;
   onSelect: (trainer: Trainer) => void;
 }) {
   return (
     <div className="w-40">
       <Combobox
         items={trainers}
+        value={value}
+        onValueChange={(trainer) => trainer && onSelect(trainer)}
         /**
          * Defines how trainers are displayed as text in the combobox input.
          */
@@ -35,19 +39,21 @@ export default function TrainerCombobox({
           `${trainer.firstName} ${trainer.lastName}`
         }
       >
-        <ComboboxInput placeholder="Trainer auswählen" />
+        <ComboboxInput
+          placeholder="Trainer auswählen"
+          value={value ? `${value.firstName} ${value.lastName}` : ""}
+        />
         <ComboboxContent>
           <ComboboxEmpty>Keine Trainer gefunden</ComboboxEmpty>
           <ComboboxList>
             {(trainer: Trainer) => (
               <ComboboxItem
                 key={trainer.id}
-                value={`${trainer.firstName} ${trainer.lastName}`}
+                value={trainer}
                 /**
                  * When a trainer is clicked, pass the trainer object
                  * to the parent component.
                  */
-                onClick={() => onSelect(trainer)}
               >
                 {trainer.firstName} {trainer.lastName}
               </ComboboxItem>
