@@ -1,5 +1,3 @@
-import { handlers } from "@/auth";
-
 /**
  * Exposes the NextAuth API routes.
  * NextAuth automatically handles authentication endpoints such as:
@@ -7,4 +5,6 @@ import { handlers } from "@/auth";
  * - /api/auth/signout
  * - /api/auth/session
  */
+import { handlers } from "@/auth";
+
 export const { GET, POST } = handlers;

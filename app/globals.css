@@ -1,3 +1,9 @@
+/**
+ * This file contains global CSS styles for the FC Zürich-Leutschenbach Squad App.
+ * It imports Tailwind CSS, the tw-animate-css plugin, and the shadcn/ui Tailwind styles.
+ * The file also defines custom CSS variables for theming and sets up base styles for the application.
+ */
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";

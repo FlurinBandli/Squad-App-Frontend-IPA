@@ -1,6 +1,10 @@
 "use server";
 
-/** Action functions for managing trainers in the admin panel. */
+/** Action functions for managing trainers in the admin panel.
+ * These functions handle creating, updating, and deleting trainers by communicating with the NestJS backend API.
+ * Each function checks for user authentication, performs the necessary API calls, and handles success or error responses accordingly.
+ * The deleteTrainerAction function also triggers a revalidation of the trainers page to reflect changes immediately.
+ */
 
 import { auth } from "@/auth";
 import { NestFetch } from "@/lib/nest-api";
@@ -13,6 +17,10 @@ import { redirect } from "next/navigation";
  * @param id The ID of the trainer to delete.
  */
 export async function deleteTrainerAction(id: number) {
+  /**
+   * Check whether the user is authenticated.
+   * Unauthorized users are redirected to the login page.
+   */
   const session = await auth();
   if (!session) redirect("/login");
 
@@ -33,7 +41,7 @@ export async function createTrainerAction(payload: TrainerPayload) {
   try {
     /**
      * Check whether the user is authenticated.
-     * Unauthorized users receive a 401 response.
+     * Unauthorized users are redirected to the login page.
      */
     const session = await auth();
     if (!session) redirect("/login");
@@ -60,7 +68,7 @@ export async function updateTrainerAction(id: number, payload: TrainerPayload) {
   try {
     /**
      * Check whether the user is authenticated.
-     * Unauthorized users receive a 401 response.
+     * Unauthorized users are redirected to the login page.
      */
     const session = await auth();
     if (!session) redirect("/login");

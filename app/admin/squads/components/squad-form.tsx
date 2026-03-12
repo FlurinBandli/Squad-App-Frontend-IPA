@@ -28,6 +28,7 @@ import {
   createSquadAction,
   updateSquadAction,
 } from "@/app/admin/squads/actions";
+import { toast } from "sonner";
 
 /**
  * Zod schema for validating the squad form inputs.
@@ -119,67 +120,67 @@ export default function SquadForm({
         : await createSquadAction(payload);
 
     if (!response.success) {
-      throw new Error(
+      toast.error(
         "Fehler beim " +
           (mode === "edit" ? "Aktualisieren" : "Erstellen") +
           " des Teams"
       );
+      return;
     }
     router.push("/admin/squads");
+    toast.success(
+      "Team erfolgreich " + (mode === "edit" ? "aktualisiert" : "erstellt")
+    );
   }
 
   return (
-    <div className="w-full min-h-screen bg-slate-100 flex  gap-5 p-4">
-      <div className="w-3/4">
-        <SquadBuilder
-          players={players}
-          trainers={trainers}
-          squad={squad}
-          setSquad={setSquad}
-        />
-      </div>
-      <Card className="w-1/4 bg-white shadow-lg ">
-        <CardHeader className="flex flex-row items-center justify-center p-4">
+    <div className="w-full bg-slate-100 flex flex-col gap-2 p-4">
+      <Card className="w-full bg-white shadow-lg ">
+        <CardHeader className="flex items-center justify-center">
           <CardTitle>Team Infos</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
-            <Field className="mb-2">
-              <FieldLabel>Teamname</FieldLabel>
-              <Input autoFocus {...form.register("name")} />
-              {form.formState.errors.name && (
-                <p className="text-sm text-red-500">
-                  {form.formState.errors.name.message}
-                </p>
-              )}
-            </Field>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <div className="flex flex-row gap-4">
+              <Field className="flex-1">
+                <FieldLabel>Teamname</FieldLabel>
+                <Input autoFocus {...form.register("name")} />
+                {form.formState.errors.name && (
+                  <p className="text-sm text-red-500">
+                    {form.formState.errors.name.message}
+                  </p>
+                )}
+              </Field>
 
-            <Field className="mb-4">
-              <FieldLabel>Beschreibung</FieldLabel>
-              <Input {...form.register("description")} />
-              {form.formState.errors.description && (
-                <p className="text-sm text-red-500">
-                  {form.formState.errors.description.message}
-                </p>
-              )}
-            </Field>
+              <Field className="flex-3">
+                <FieldLabel>Beschreibung</FieldLabel>
+                <Input {...form.register("description")} />
+                {form.formState.errors.description && (
+                  <p className="text-sm text-red-500">
+                    {form.formState.errors.description.message}
+                  </p>
+                )}
+              </Field>
 
-            <Field className="mb-4">
-              <FieldLabel>Datum</FieldLabel>
-              <Input type="date" {...form.register("date")} />
-              {form.formState.errors.date && (
-                <p className="text-sm text-red-500">
-                  {form.formState.errors.date.message}
-                </p>
-              )}
-            </Field>
+              <Field className="flex-1">
+                <FieldLabel>Datum</FieldLabel>
+                <Input type="date" {...form.register("date")} />
+                {form.formState.errors.date && (
+                  <p className="text-sm text-red-500">
+                    {form.formState.errors.date.message}
+                  </p>
+                )}
+              </Field>
+            </div>
+
             <div className="flex gap-2">
-              <Button type="submit">
+              <Button type="submit" className="cursor-pointer">
                 {mode === "edit" ? "Team aktualisieren" : "Team erstellen"}
               </Button>
               <Button
                 type="button"
                 variant="outline"
+                className="cursor-pointer"
                 onClick={() => router.push("/admin/squads")}
               >
                 Abbrechen
@@ -188,6 +189,15 @@ export default function SquadForm({
           </form>
         </CardContent>
       </Card>
+
+      <div className="w-full">
+        <SquadBuilder
+          players={players}
+          trainers={trainers}
+          squad={squad}
+          setSquad={setSquad}
+        />
+      </div>
     </div>
   );
 }

@@ -14,7 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
+import { CirclePlus, Pencil } from "lucide-react";
 import { Player } from "@/types";
 import DeletePlayerButton from "@/app/admin/players/components/delete-player-button";
 import PlayerForm from "@/app/admin/players/components/player-form";
@@ -45,6 +45,7 @@ export default function PlayersClient({ players }: { players: Player[] }) {
         className="flex justify-center w-full mb-4 cursor-pointer"
         onClick={handleCreate}
       >
+        <CirclePlus className="w-4 h-4 mr-2" />
         Neuen Spieler erstellen
       </Button>
 

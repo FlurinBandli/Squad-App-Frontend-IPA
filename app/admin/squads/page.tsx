@@ -21,6 +21,7 @@ import { Eye, Pencil } from "lucide-react";
 import { Squad } from "@/types";
 import DeleteSquadButton from "./components/delete-squad-button";
 import { encodeSquadId } from "@/lib/hashids";
+import { CirclePlus } from "lucide-react";
 
 export default async function SquadsPage() {
   // Check if the user is authenticated, if not redirect to login page
@@ -38,7 +39,10 @@ export default async function SquadsPage() {
   return (
     <div className="p-4">
       <Button className="flex justify-center mb-4" asChild>
-        <Link href="/admin/squads/new">Neues Team erstellen</Link>
+        <Link href="/admin/squads/new">
+          {" "}
+          <CirclePlus className="w-4 h-4 mr-2" /> Neues Team erstellen
+        </Link>
       </Button>
 
       {/* Table displaying the list of squads with options to view, edit or delete each squad */}
