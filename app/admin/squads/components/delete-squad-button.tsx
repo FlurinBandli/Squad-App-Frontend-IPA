@@ -36,7 +36,11 @@ export default function DeleteSquadButton({ id }: { id: number }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" className="cursor-pointer">
+        <Button
+          title="Team löschen"
+          variant="destructive"
+          className="cursor-pointer"
+        >
           <Trash2 />
         </Button>
       </AlertDialogTrigger>

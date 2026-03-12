@@ -79,7 +79,7 @@ export default async function SquadsPage() {
                   {new Date(squad.date).toLocaleDateString("de-CH")}
                 </TableCell>
                 <TableCell className="text-center">
-                  <Button variant="outline" asChild>
+                  <Button variant="outline" title="Team ansehen" asChild>
                     <Link
                       href={`/squad/${encodeSquadId(squad.id)}`}
                       target="_blank"
@@ -89,7 +89,7 @@ export default async function SquadsPage() {
                   </Button>
                 </TableCell>
                 <TableCell className="text-center">
-                  <Button variant="outline" asChild>
+                  <Button variant="default" title="Team bearbeiten" asChild>
                     <Link href={`/admin/squads/${squad.id}/edit`}>
                       <Pencil />
                     </Link>

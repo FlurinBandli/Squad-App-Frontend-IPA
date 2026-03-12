@@ -47,7 +47,7 @@ export default async function ViewSquad({
   const formattedDate = new Date(squad.date).toLocaleDateString("de-CH");
 
   return (
-    <div className="max-w-6xl mx-auto p-8">
+    <main className="max-w-6xl mx-auto p-8">
       <div className="m-3">
         <h1 className="text-3xl font-semibold">{squad.name}</h1>
         <p className="text-lg text-muted-foreground">{formattedDate}</p>
@@ -56,7 +56,9 @@ export default async function ViewSquad({
       <div className="flex gap-5">
         <div
           className="w-3/4 bg-cover bg-no-repeat bg-center p-6 min-h-165 rounded-2xl"
-          style={{ backgroundImage: "url(/football_pitch.png)" }}
+          style={{
+            backgroundImage: "url(/football_pitch.avif)",
+          }}
         >
           <div className="flex flex-col justify-between py-9 h-full">
             {fieldPositions.map((position) => {
@@ -66,7 +68,13 @@ export default async function ViewSquad({
               );
               return (
                 <div key={position.key}>
-                  <span className="flex justify-center text-2xl font-semibold text-white tracking-wide drop-shadow-lg pb-2">
+                  <span
+                    className="flex justify-center text-2xl font-semibold text-white  tracking-wide pb-2"
+                    style={{
+                      textShadow:
+                        "2px 2px 4px rgba(0,0,0,0.8), -2px -2px 4px rgba(0,0,0,0.8), 2px -2px 4px rgba(0,0,0,0.8), -2px 2px 4px rgba(0,0,0,0.8)",
+                    }}
+                  >
                     {position.label}
                   </span>
                   <div className="flex flex-row flex-wrap gap-4 justify-evenly w-full ">
@@ -108,6 +116,6 @@ export default async function ViewSquad({
           <CopyLinkButton />
         </div>
       </div>
-    </div>
+    </main>
   );
 }

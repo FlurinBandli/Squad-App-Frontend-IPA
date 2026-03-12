@@ -36,7 +36,11 @@ export default function DeletePlayerButton({ id }: { id: number }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive" className="cursor-pointer">
+        <Button
+          variant="destructive"
+          title="Spieler löschen"
+          className="cursor-pointer"
+        >
           <Trash2 />
         </Button>
       </AlertDialogTrigger>

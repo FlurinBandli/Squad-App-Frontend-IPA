@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 /**
@@ -8,13 +7,7 @@
  */
 import Link from "next/link";
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error;
-  reset: () => void;
-}) {
+export default function Error() {
   return (
     <div className="flex flex-col min-h-screen items-center justify-center gap-4 p-4 text-center">
       <h1 className="text-2xl font-bold mb-4">Etwas ist schiefgelaufen</h1>

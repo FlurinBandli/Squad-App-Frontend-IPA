@@ -83,6 +83,7 @@ export default function TrainersClient({ trainers }: { trainers: Trainer[] }) {
 
                 <TableCell>
                   <Button
+                    title="Trainer bearbeiten"
                     type="button"
                     className="cursor-pointer"
                     onClick={() => handleEdit(trainer)}

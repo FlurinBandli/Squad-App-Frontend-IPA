@@ -14,7 +14,7 @@ export default async function HomePage() {
     redirect("/admin/squads");
   }
   return (
-    <div className="flex flex-col items-center justify-center gap-4 p-4">
+    <main className="flex flex-col items-center justify-center gap-4 p-4">
       <p className="font-semibold text-2xl">
         Willkommen bei der Squad-App vom FC Zürich-Leutschenbach
       </p>
@@ -24,6 +24,6 @@ export default async function HomePage() {
         width={200}
         height={100}
       />
-    </div>
+    </main>
   );
 }
