@@ -139,15 +139,27 @@ export default function SquadBuilder({
 
             <div className="flex justify-center">
               {addingStriker && (
-                <PlayerCombobox
-                  players={players.filter(
-                    (p) => !selectedPlayerIds.includes(p.id)
-                  )}
-                  onSelect={(player) => {
-                    addPlayerToPosition(player, "Striker");
-                    setAddingStriker(false);
-                  }}
-                />
+                <div className="flex flex-row-reverse gap-2">
+                  <Button
+                    title="Hinzufügen abbrechen"
+                    type="button"
+                    size="icon"
+                    variant="destructive"
+                    className="cursor-pointer"
+                    onClick={() => setAddingStriker(false)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                  <PlayerCombobox
+                    players={players.filter(
+                      (p) => !selectedPlayerIds.includes(p.id)
+                    )}
+                    onSelect={(player) => {
+                      addPlayerToPosition(player, "Striker");
+                      setAddingStriker(false);
+                    }}
+                  />
+                </div>
               )}
             </div>
 
@@ -201,15 +213,27 @@ export default function SquadBuilder({
 
             <div className="flex justify-center">
               {addingMidfielder && (
-                <PlayerCombobox
-                  players={players.filter(
-                    (p) => !selectedPlayerIds.includes(p.id)
-                  )}
-                  onSelect={(player) => {
-                    addPlayerToPosition(player, "Midfielder");
-                    setAddingMidfielder(false);
-                  }}
-                />
+                <div className="flex flex-row-reverse gap-2">
+                  <Button
+                    title="Hinzufügen abbrechen"
+                    type="button"
+                    size="icon"
+                    variant="destructive"
+                    className="cursor-pointer"
+                    onClick={() => setAddingMidfielder(false)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                  <PlayerCombobox
+                    players={players.filter(
+                      (p) => !selectedPlayerIds.includes(p.id)
+                    )}
+                    onSelect={(player) => {
+                      addPlayerToPosition(player, "Midfielder");
+                      setAddingMidfielder(false);
+                    }}
+                  />
+                </div>
               )}
             </div>
 
@@ -263,15 +287,27 @@ export default function SquadBuilder({
 
             <div className="flex justify-center">
               {addingDefender && (
-                <PlayerCombobox
-                  players={players.filter(
-                    (p) => !selectedPlayerIds.includes(p.id)
-                  )}
-                  onSelect={(player) => {
-                    addPlayerToPosition(player, "Defender");
-                    setAddingDefender(false);
-                  }}
-                />
+                <div className="flex flex-row-reverse gap-2">
+                  <Button
+                    title="Hinzufügen abbrechen"
+                    type="button"
+                    size="icon"
+                    variant="destructive"
+                    className="cursor-pointer"
+                    onClick={() => setAddingDefender(false)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                  <PlayerCombobox
+                    players={players.filter(
+                      (p) => !selectedPlayerIds.includes(p.id)
+                    )}
+                    onSelect={(player) => {
+                      addPlayerToPosition(player, "Defender");
+                      setAddingDefender(false);
+                    }}
+                  />
+                </div>
               )}
             </div>
 
@@ -325,15 +361,27 @@ export default function SquadBuilder({
 
             <div className="flex justify-center">
               {addingGoalkeeper && (
-                <PlayerCombobox
-                  players={players.filter(
-                    (p) => !selectedPlayerIds.includes(p.id)
-                  )}
-                  onSelect={(player) => {
-                    addPlayerToPosition(player, "Goalkeeper");
-                    setAddingGoalkeeper(false);
-                  }}
-                />
+                <div className="flex flex-row-reverse gap-2">
+                  <Button
+                    title="Hinzufügen abbrechen"
+                    type="button"
+                    size="icon"
+                    variant="destructive"
+                    className="cursor-pointer"
+                    onClick={() => setAddingGoalkeeper(false)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                  <PlayerCombobox
+                    players={players.filter(
+                      (p) => !selectedPlayerIds.includes(p.id)
+                    )}
+                    onSelect={(player) => {
+                      addPlayerToPosition(player, "Goalkeeper");
+                      setAddingGoalkeeper(false);
+                    }}
+                  />
+                </div>
               )}
             </div>
           </div>
@@ -389,15 +437,27 @@ export default function SquadBuilder({
 
             <div className="flex justify-center">
               {addingTrainer && (
-                <TrainerCombobox
-                  trainers={trainers.filter(
-                    (t) => !squad.trainers.some((b) => b.id === t.id)
-                  )}
-                  onSelect={(trainer) => {
-                    addTrainer(trainer);
-                    setAddingTrainer(false);
-                  }}
-                />
+                <div className="flex flex-row-reverse gap-2">
+                  <Button
+                    title="Hinzufügen abbrechen"
+                    type="button"
+                    size="icon"
+                    variant="destructive"
+                    className="cursor-pointer"
+                    onClick={() => setAddingGoalkeeper(false)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                  <TrainerCombobox
+                    trainers={trainers.filter(
+                      (t) => !squad.trainers.some((b) => b.id === t.id)
+                    )}
+                    onSelect={(trainer) => {
+                      addTrainer(trainer);
+                      setAddingTrainer(false);
+                    }}
+                  />
+                </div>
               )}
             </div>
 
@@ -451,15 +511,27 @@ export default function SquadBuilder({
 
             <div className="flex justify-center">
               {addingBackup && (
-                <PlayerCombobox
-                  players={players.filter(
-                    (p) => !selectedPlayerIds.includes(p.id)
-                  )}
-                  onSelect={(player) => {
-                    addPlayerToPosition(player, "Backup");
-                    setAddingBackup(false);
-                  }}
-                />
+                <div className="flex flex-row-reverse gap-2">
+                  <Button
+                    title="Hinzufügen abbrechen"
+                    type="button"
+                    size="icon"
+                    variant="destructive"
+                    className="cursor-pointer"
+                    onClick={() => setAddingBackup(false)}
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                  <PlayerCombobox
+                    players={players.filter(
+                      (p) => !selectedPlayerIds.includes(p.id)
+                    )}
+                    onSelect={(player) => {
+                      addPlayerToPosition(player, "Backup");
+                      setAddingBackup(false);
+                    }}
+                  />
+                </div>
               )}
             </div>
           </div>
