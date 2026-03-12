@@ -80,6 +80,7 @@ export default function PlayersClient({ players }: { players: Player[] }) {
 
                 <TableCell>
                   <Button
+                    title="Spieler bearbeiten"
                     type="button"
                     className="cursor-pointer"
                     onClick={() => handleEdit(player)}
