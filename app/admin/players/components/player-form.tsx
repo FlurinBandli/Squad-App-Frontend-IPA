@@ -28,6 +28,7 @@ import {
 } from "@/app/admin/players/actions";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   firstName: z.string().min(1, "Vorname ist erforderlich"),
@@ -77,14 +78,19 @@ export default function PlayerForm({
         : await createPlayerAction(payload);
 
     if (!response.success) {
-      throw new Error(
+      toast.error(
         "Fehler beim " +
           (mode === "edit" ? "Aktualisieren" : "Erstellen") +
-          " des Spielers"
+          " des Spielers: "
       );
     }
     setOpen(false);
     router.refresh();
+    {
+      toast.success(
+        "Spieler erfolgreich " + (mode === "edit" ? "aktualisiert" : "erstellt")
+      );
+    }
   }
 
   const router = useRouter();

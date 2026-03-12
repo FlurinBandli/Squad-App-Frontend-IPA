@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Image from "next/image";
+import { LogIn } from "lucide-react";
 
 /**
  * Zod schema for validating the login form inputs.
@@ -104,7 +105,8 @@ export default function LoginForm() {
                 </p>
               )}
             </Field>
-            <Button className="w-full" type="submit">
+            <Button className="w-full cursor-pointer" type="submit">
+              <LogIn className="w-4 h-4 mr-2" />
               Login
             </Button>
           </form>

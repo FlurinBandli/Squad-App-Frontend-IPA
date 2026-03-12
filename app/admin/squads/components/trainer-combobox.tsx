@@ -27,7 +27,7 @@ export default function TrainerCombobox({
   onSelect: (trainer: Trainer) => void;
 }) {
   return (
-    <div className="w-40">
+    <div className="w-44">
       <Combobox
         items={trainers}
         value={value}

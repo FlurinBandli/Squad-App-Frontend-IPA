@@ -1,3 +1,7 @@
+/**
+ * This file contains utility functions that are used by various shadcn/ui components.
+ */
+
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 

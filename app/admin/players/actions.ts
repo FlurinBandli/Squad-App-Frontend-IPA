@@ -1,6 +1,10 @@
 "use server";
 
-/** Action functions for managing players in the admin panel. */
+/** Action functions for managing players in the admin panel.
+ * These functions handle creating, updating, and deleting players by communicating with the NestJS backend API.
+ * Each function checks for user authentication, performs the necessary API calls, and handles success or error responses accordingly.
+ * The deletePlayerAction function also triggers a revalidation of the players page to reflect changes immediately.
+ */
 
 import { auth } from "@/auth";
 import { NestFetch } from "@/lib/nest-api";
@@ -13,6 +17,10 @@ import { redirect } from "next/navigation";
  * @param id The ID of the player to delete.
  */
 export async function deletePlayerAction(id: number) {
+  /**
+   * Check whether the user is authenticated.
+   * Unauthorized users are redirected to the login page.
+   */
   const session = await auth();
   if (!session) redirect("/login");
 
@@ -33,7 +41,7 @@ export async function createPlayerAction(payload: PlayerPayload) {
   try {
     /**
      * Check whether the user is authenticated.
-     * Unauthorized users receive a 401 response.
+     * Unauthorized users are redirected to the login page.
      */
     const session = await auth();
     if (!session) redirect("/login");
@@ -60,7 +68,7 @@ export async function updatePlayerAction(id: number, payload: PlayerPayload) {
   try {
     /**
      * Check whether the user is authenticated.
-     * Unauthorized users receive a 401 response.
+     * Unauthorized users are redirected to the login page.
      */
     const session = await auth();
     if (!session) redirect("/login");

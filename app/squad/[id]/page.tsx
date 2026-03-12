@@ -16,7 +16,7 @@ export default async function ViewSquad({
 }) {
   const { id } = await params;
 
-  // Decode the hashid from the URL to obtain teh actual database ID
+  // Decode the hashid from the URL to obtain the actual database ID
   const decodedId = decodeSquadId(id);
 
   let squad: SquadResponse;
@@ -69,7 +69,7 @@ export default async function ViewSquad({
                   <span className="flex justify-center text-2xl font-semibold text-white tracking-wide drop-shadow-lg pb-2">
                     {position.label}
                   </span>
-                  <div className="flex flex-row gap-4 justify-evenly w-full ">
+                  <div className="flex flex-row flex-wrap gap-4 justify-evenly w-full ">
                     {players.map((player) => (
                       <div
                         key={player.id}

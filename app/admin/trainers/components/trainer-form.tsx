@@ -28,6 +28,7 @@ import {
 } from "@/app/admin/trainers/actions";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   firstName: z.string().min(1, "Vorname ist erforderlich"),
@@ -35,6 +36,13 @@ const formSchema = z.object({
   gender: z.enum(["Male", "Female", "Other"]),
 });
 
+/**
+ * TrainerForm component for creating and editing trainers.
+ * @param open Controls whether the form sheet is open or closed.
+ * @param setOpen Function to update the open state of the sheet.
+ * @param mode Determines whether the form is in "create" or "edit" mode. Defaults to "create".
+ * @param trainer The trainer object to edit when in "edit" mode. Optional.
+ */
 export default function TrainerForm({
   open,
   setOpen,
@@ -77,14 +85,18 @@ export default function TrainerForm({
         : await createTrainerAction(payload);
 
     if (!response.success) {
-      throw new Error(
+      toast.error(
         "Fehler beim " +
           (mode === "edit" ? "Aktualisieren" : "Erstellen") +
           " des Trainers"
       );
+      return;
     }
     setOpen(false);
     router.refresh();
+    toast.success(
+      "Trainer erfolgreich " + (mode === "edit" ? "aktualisiert" : "erstellt")
+    );
   }
 
   const router = useRouter();

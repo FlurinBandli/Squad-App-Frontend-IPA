@@ -14,7 +14,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
+import { CirclePlus, Pencil } from "lucide-react";
 import { Trainer } from "@/types";
 import DeleteTrainerButton from "@/app/admin/trainers/components/delete-trainer-button";
 
@@ -28,12 +28,14 @@ export default function TrainersClient({ trainers }: { trainers: Trainer[] }) {
     undefined
   );
 
+  // Handler function to open the TrainerForm in create mode
   function handleCreate() {
     setMode("create");
     setSelectedTrainer(undefined);
     setOpen(true);
   }
 
+  // Handler function to open the TrainerForm in edit mode with the selected trainer's data
   function handleEdit(trainer: Trainer) {
     setMode("edit");
     setSelectedTrainer(trainer);
@@ -46,6 +48,7 @@ export default function TrainersClient({ trainers }: { trainers: Trainer[] }) {
         className="flex justify-center w-full mb-4 cursor-pointer"
         onClick={handleCreate}
       >
+        <CirclePlus className="w-4 h-4 mr-2" />
         Neuen Trainer erstellen
       </Button>
 

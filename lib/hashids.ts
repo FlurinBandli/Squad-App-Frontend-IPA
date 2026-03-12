@@ -10,10 +10,12 @@ import Hashids from "hashids";
 
 const hashids = new Hashids("squad-app-salt", 10);
 
+// Encodes a numeric squad ID into a hashed string using Hashids.
 export function encodeSquadId(id: number) {
   return hashids.encode(id);
 }
 
+// Decodes a hashed squad ID back into its original numeric form.
 export function decodeSquadId(hash: string) {
   const decoded = hashids.decode(hash);
   if (decoded.length === 0) {

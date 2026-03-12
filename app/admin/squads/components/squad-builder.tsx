@@ -14,7 +14,7 @@ import { Player, Trainer, Position, SquadState } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import PlayerCombobox from "@/app/admin/squads/components/player-combobox";
 import { Button } from "@/components/ui/button";
-import { UserPlus, UserMinus } from "lucide-react";
+import { UserPlus, Trash2 } from "lucide-react";
 import { useState, Dispatch, SetStateAction } from "react";
 import TrainerCombobox from "@/app/admin/squads/components/trainer-combobox";
 
@@ -89,42 +89,50 @@ export default function SquadBuilder({
       <CardContent>
         <div className="flex flex-row gap-4">
           {/* left side: the lineup */}
-
           <div className="flex flex-col gap-4 border-2 w-2/3">
             {/* striker section */}
-
-            <div className="flex items-center justify-center gap-2">
-              <span>Sturm</span>
-              <Button type="button" onClick={() => setAddingStriker(true)}>
+            <div className="flex items-center justify-center gap-2 pt-4">
+              <span className="font-semibold">Sturm</span>
+              <Button
+                title="Spieler hinzufügen"
+                type="button"
+                className="cursor-pointer"
+                onClick={() => setAddingStriker(true)}
+              >
                 <UserPlus className="w-4 h-4" />
               </Button>
             </div>
 
-            <div className="flex flex-row justify-center gap-2">
+            <div className="flex flex-row flex-wrap justify-center gap-2">
               {playersByPosition("Striker").map((player) => (
                 <div
                   key={player.id}
-                  className="flex flex-col w-32 items-center text-center gap-2"
+                  className="flex flex-col items-center text-center gap-2"
                 >
-                  <Button
-                    type="button"
-                    size="icon"
-                    variant="outline"
-                    onClick={() => removePlayer(player.id)}
-                  >
-                    <UserMinus className="h-4 w-4" />
-                  </Button>
-                  <PlayerCombobox
-                    players={players.filter(
-                      (p) =>
-                        p.id === player.id || !selectedPlayerIds.includes(p.id)
-                    )}
-                    value={player}
-                    onSelect={(p) => {
-                      removePlayer(player.id);
-                      addPlayerToPosition(p, "Striker");
-                    }}
-                  />
+                  <div className="flex flex-row-reverse gap-2">
+                    <Button
+                      title="Spieler entfernen"
+                      type="button"
+                      size="icon"
+                      variant="destructive"
+                      className="cursor-pointer"
+                      onClick={() => removePlayer(player.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                    <PlayerCombobox
+                      players={players.filter(
+                        (p) =>
+                          p.id === player.id ||
+                          !selectedPlayerIds.includes(p.id)
+                      )}
+                      value={player}
+                      onSelect={(p) => {
+                        removePlayer(player.id);
+                        addPlayerToPosition(p, "Striker");
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -146,37 +154,47 @@ export default function SquadBuilder({
             {/* midfielder section */}
 
             <div className="flex items-center justify-center gap-2">
-              <span>Mittelfeld</span>
-              <Button type="button" onClick={() => setAddingMidfielder(true)}>
+              <span className="font-semibold">Mittelfeld</span>
+              <Button
+                type="button"
+                title="Spieler hinzufügen"
+                className="cursor-pointer"
+                onClick={() => setAddingMidfielder(true)}
+              >
                 <UserPlus className="w-4 h-4" />
               </Button>
             </div>
 
-            <div className="flex flex-row justify-center gap-2">
+            <div className="flex flex-row flex-wrap justify-center gap-2">
               {playersByPosition("Midfielder").map((player) => (
                 <div
                   key={player.id}
-                  className="flex flex-col w-32 items-center text-center gap-2"
+                  className="flex flex-col items-center text-center gap-2"
                 >
-                  <Button
-                    type="button"
-                    size="icon"
-                    variant="outline"
-                    onClick={() => removePlayer(player.id)}
-                  >
-                    <UserMinus className="h-4 w-4" />
-                  </Button>
-                  <PlayerCombobox
-                    players={players.filter(
-                      (p) =>
-                        p.id === player.id || !selectedPlayerIds.includes(p.id)
-                    )}
-                    value={player}
-                    onSelect={(p) => {
-                      removePlayer(player.id);
-                      addPlayerToPosition(p, "Midfielder");
-                    }}
-                  />
+                  <div className="flex flex-row-reverse gap-2">
+                    <Button
+                      title="Spieler entfernen"
+                      type="button"
+                      size="icon"
+                      variant="destructive"
+                      className="cursor-pointer"
+                      onClick={() => removePlayer(player.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                    <PlayerCombobox
+                      players={players.filter(
+                        (p) =>
+                          p.id === player.id ||
+                          !selectedPlayerIds.includes(p.id)
+                      )}
+                      value={player}
+                      onSelect={(p) => {
+                        removePlayer(player.id);
+                        addPlayerToPosition(p, "Midfielder");
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -198,37 +216,47 @@ export default function SquadBuilder({
             {/* defender section */}
 
             <div className="flex items-center justify-center gap-2">
-              <span>Verteidigung</span>
-              <Button type="button" onClick={() => setAddingDefender(true)}>
+              <span className="font-semibold">Verteidigung</span>
+              <Button
+                title="Spieler hinzufügen"
+                type="button"
+                className="cursor-pointer"
+                onClick={() => setAddingDefender(true)}
+              >
                 <UserPlus className="w-4 h-4" />
               </Button>
             </div>
 
-            <div className="flex flex-row justify-center gap-2">
+            <div className="flex flex-row flex-wrap justify-center gap-2">
               {playersByPosition("Defender").map((player) => (
                 <div
                   key={player.id}
-                  className="flex flex-col w-32 items-center text-center gap-2"
+                  className="flex flex-col items-center text-center gap-2"
                 >
-                  <Button
-                    type="button"
-                    size="icon"
-                    variant="outline"
-                    onClick={() => removePlayer(player.id)}
-                  >
-                    <UserMinus className="h-4 w-4" />
-                  </Button>
-                  <PlayerCombobox
-                    players={players.filter(
-                      (p) =>
-                        p.id === player.id || !selectedPlayerIds.includes(p.id)
-                    )}
-                    value={player}
-                    onSelect={(p) => {
-                      removePlayer(player.id);
-                      addPlayerToPosition(p, "Defender");
-                    }}
-                  />
+                  <div className="flex flex-row-reverse gap-2">
+                    <Button
+                      title="Spieler entfernen"
+                      type="button"
+                      size="icon"
+                      variant="destructive"
+                      className="cursor-pointer"
+                      onClick={() => removePlayer(player.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                    <PlayerCombobox
+                      players={players.filter(
+                        (p) =>
+                          p.id === player.id ||
+                          !selectedPlayerIds.includes(p.id)
+                      )}
+                      value={player}
+                      onSelect={(p) => {
+                        removePlayer(player.id);
+                        addPlayerToPosition(p, "Defender");
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -250,37 +278,47 @@ export default function SquadBuilder({
             {/* goalkeeper section */}
 
             <div className="flex items-center justify-center gap-2">
-              <span>Torwart</span>
-              <Button type="button" onClick={() => setAddingGoalkeeper(true)}>
+              <span className="font-semibold">Torwart</span>
+              <Button
+                title="Spieler hinzufügen"
+                type="button"
+                className="cursor-pointer"
+                onClick={() => setAddingGoalkeeper(true)}
+              >
                 <UserPlus className="w-4 h-4" />
               </Button>
             </div>
 
-            <div className="flex flex-row justify-center gap-2">
+            <div className="flex flex-row flex-wrap justify-center gap-2">
               {playersByPosition("Goalkeeper").map((player) => (
                 <div
                   key={player.id}
-                  className="flex flex-col w-32 items-center text-center gap-2"
+                  className="flex flex-col items-center text-center gap-2"
                 >
-                  <Button
-                    type="button"
-                    size="icon"
-                    variant="outline"
-                    onClick={() => removePlayer(player.id)}
-                  >
-                    <UserMinus className="h-4 w-4" />
-                  </Button>
-                  <PlayerCombobox
-                    players={players.filter(
-                      (p) =>
-                        p.id === player.id || !selectedPlayerIds.includes(p.id)
-                    )}
-                    value={player}
-                    onSelect={(p) => {
-                      removePlayer(player.id);
-                      addPlayerToPosition(p, "Goalkeeper");
-                    }}
-                  />
+                  <div className="flex flex-row-reverse gap-2">
+                    <Button
+                      title="Spieler entfernen"
+                      type="button"
+                      size="icon"
+                      variant="destructive"
+                      className="cursor-pointer"
+                      onClick={() => removePlayer(player.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                    <PlayerCombobox
+                      players={players.filter(
+                        (p) =>
+                          p.id === player.id ||
+                          !selectedPlayerIds.includes(p.id)
+                      )}
+                      value={player}
+                      onSelect={(p) => {
+                        removePlayer(player.id);
+                        addPlayerToPosition(p, "Goalkeeper");
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -301,43 +339,50 @@ export default function SquadBuilder({
           </div>
 
           {/* right side the trainers and backups */}
-
           <div className="flex flex-col gap-4 border-2 w-1/3">
             {/* trainer section */}
-
-            <div className="flex items-center justify-center gap-2">
-              <span>Trainer</span>
-              <Button type="button" onClick={() => setAddingTrainer(true)}>
+            <div className="flex items-center justify-center gap-2 pt-4">
+              <span className="font-semibold">Trainer</span>
+              <Button
+                title="Trainer hinzufügen"
+                type="button"
+                className="cursor-pointer"
+                onClick={() => setAddingTrainer(true)}
+              >
                 <UserPlus className="w-4 h-4" />
               </Button>
             </div>
 
-            <div className="flex flex-row justify-center gap-2">
+            <div className="flex flex-row flex-wrap justify-center gap-2">
               {squad.trainers.map((trainer) => (
                 <div
                   key={trainer.id}
-                  className="flex flex-col w-32 items-center text-center gap-2"
+                  className="flex flex-col items-center text-center gap-2"
                 >
-                  <Button
-                    type="button"
-                    size="icon"
-                    variant="outline"
-                    onClick={() => removeTrainer(trainer.id)}
-                  >
-                    <UserMinus className="h-4 w-4" />
-                  </Button>
-                  <TrainerCombobox
-                    trainers={trainers.filter(
-                      (t) =>
-                        t.id === trainer.id ||
-                        !squad.trainers.some((bt) => bt.id === t.id)
-                    )}
-                    value={trainer}
-                    onSelect={(t) => {
-                      removeTrainer(trainer.id);
-                      addTrainer(t);
-                    }}
-                  />
+                  <div className="flex flex-row-reverse gap-2">
+                    <Button
+                      title="Trainer entfernen"
+                      type="button"
+                      size="icon"
+                      variant="destructive"
+                      className="cursor-pointer"
+                      onClick={() => removeTrainer(trainer.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                    <TrainerCombobox
+                      trainers={trainers.filter(
+                        (t) =>
+                          t.id === trainer.id ||
+                          !squad.trainers.some((bt) => bt.id === t.id)
+                      )}
+                      value={trainer}
+                      onSelect={(t) => {
+                        removeTrainer(trainer.id);
+                        addTrainer(t);
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -359,37 +404,47 @@ export default function SquadBuilder({
             {/* backup section */}
 
             <div className="flex items-center justify-center gap-2">
-              <span>Ersatz</span>
-              <Button type="button" onClick={() => setAddingBackup(true)}>
+              <span className="font-semibold">Ersatz</span>
+              <Button
+                title="Spieler hinzufügen"
+                type="button"
+                className="cursor-pointer"
+                onClick={() => setAddingBackup(true)}
+              >
                 <UserPlus className="w-4 h-4" />
               </Button>
             </div>
 
-            <div className="flex flex-row justify-center gap-2">
+            <div className="flex flex-row flex-wrap justify-center gap-2">
               {playersByPosition("Backup").map((player) => (
                 <div
                   key={player.id}
-                  className="flex flex-col w-32 items-center text-center gap-2"
+                  className="flex flex-col items-center text-center gap-2"
                 >
-                  <Button
-                    type="button"
-                    size="icon"
-                    variant="outline"
-                    onClick={() => removePlayer(player.id)}
-                  >
-                    <UserMinus className="h-4 w-4" />
-                  </Button>
-                  <PlayerCombobox
-                    players={players.filter(
-                      (p) =>
-                        p.id === player.id || !selectedPlayerIds.includes(p.id)
-                    )}
-                    value={player}
-                    onSelect={(p) => {
-                      removePlayer(player.id);
-                      addPlayerToPosition(p, "Backup");
-                    }}
-                  />
+                  <div className="flex flex-row-reverse gap-2">
+                    <Button
+                      title="Spieler entfernen"
+                      type="button"
+                      size="icon"
+                      variant="destructive"
+                      className="cursor-pointer"
+                      onClick={() => removePlayer(player.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                    <PlayerCombobox
+                      players={players.filter(
+                        (p) =>
+                          p.id === player.id ||
+                          !selectedPlayerIds.includes(p.id)
+                      )}
+                      value={player}
+                      onSelect={(p) => {
+                        removePlayer(player.id);
+                        addPlayerToPosition(p, "Backup");
+                      }}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
