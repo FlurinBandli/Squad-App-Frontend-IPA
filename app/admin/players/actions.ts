@@ -15,6 +15,8 @@ import { redirect } from "next/navigation";
 /**
  * Action function to delete a player.
  * @param id The ID of the player to delete.
+ * @returns A promise resolving to the result of the deletion operation.
+ * @throws Redirects to the login page if the user is not authenticated.
  */
 export async function deletePlayerAction(id: number) {
   /**
@@ -30,13 +32,22 @@ export async function deletePlayerAction(id: number) {
     });
 
     revalidatePath("/admin/players");
-    return { success: true, message: "Spieler erfolgreich gelöscht" };
+    return { success: true, message: "Player successfully deleted" };
   } catch (error) {
-    console.log(error);
-    return { success: false, message: "Fehler beim Löschen des Spielers" };
+    console.error(error);
+    return {
+      success: false,
+      message: "Error occurred while deleting the player",
+    };
   }
 }
 
+/**
+ *  Action function to create a new player.
+ * @param payload The data for the new player to be created.
+ * @returns A promise resolving to the result of the creation operation, including any data returned from the backend.
+ * @throws Redirects to the login page if the user is not authenticated.
+ */
 export async function createPlayerAction(payload: PlayerPayload) {
   try {
     /**
@@ -57,13 +68,23 @@ export async function createPlayerAction(payload: PlayerPayload) {
       body: JSON.stringify(payload),
     });
 
-    return { success: true, message: "Spieler erfolgreich erstellt", data };
+    return { success: true, message: "Player successfully created", data };
   } catch (error) {
-    console.log(error);
-    return { success: false, message: "Fehler beim Erstellen des Spielers" };
+    console.error(error);
+    return {
+      success: false,
+      message: "Error occurred while creating the player",
+    };
   }
 }
 
+/**
+ *  Action function to update an existing player.
+ * @param id The ID of the player to update.
+ * @param payload The updated data for the player.
+ * @returns A promise resolving to the result of the update operation, including any data returned from the backend.
+ * @throws Redirects to the login page if the user is not authenticated.
+ */
 export async function updatePlayerAction(id: number, payload: PlayerPayload) {
   try {
     /**
@@ -84,12 +105,12 @@ export async function updatePlayerAction(id: number, payload: PlayerPayload) {
       body: JSON.stringify(payload),
     });
 
-    return { success: true, message: "Spieler erfolgreich aktualisiert", data };
+    return { success: true, message: "Player successfully updated", data };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       success: false,
-      message: "Fehler beim Aktualisieren des Spielers",
+      message: "Error occurred while updating the player",
     };
   }
 }

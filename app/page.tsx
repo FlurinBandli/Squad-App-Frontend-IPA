@@ -20,7 +20,7 @@ export default async function HomePage() {
       </p>
       <Image
         src="/fc-zh-leutschenbach-logo.png"
-        alt="Logo"
+        alt="Logo FC Zürich-Leutschenbach"
         width={200}
         height={100}
       />

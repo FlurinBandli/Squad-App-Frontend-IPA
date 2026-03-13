@@ -14,6 +14,8 @@ import { redirect } from "next/navigation";
 /**
  * Action function to delete a squad.
  * @param id The ID of the squad to delete.
+ * @returns A promise resolving to the result of the deletion operation.
+ * @throws Redirects to the login page if the user is not authenticated.
  */
 export async function deleteSquadAction(id: number) {
   /**
@@ -29,13 +31,22 @@ export async function deleteSquadAction(id: number) {
     });
 
     revalidatePath("/admin/squads");
-    return { success: true, message: "Team erfolgreich gelöscht" };
+    return { success: true, message: "Squad successfully deleted" };
   } catch (error) {
-    console.log(error);
-    return { success: false, message: "Fehler beim Löschen des Teams" };
+    console.error(error);
+    return {
+      success: false,
+      message: "Error occurred while deleting the squad",
+    };
   }
 }
 
+/**
+ *  Action function to create a new squad.
+ * @param payload The data for the new squad to be created.
+ * @returns A promise resolving to the result of the creation operation, including any data returned from the backend.
+ * @throws Redirects to the login page if the user is not authenticated.
+ */
 export async function createSquadAction(payload: SquadPayload) {
   try {
     /**
@@ -56,13 +67,23 @@ export async function createSquadAction(payload: SquadPayload) {
       body: JSON.stringify(payload),
     });
 
-    return { success: true, message: "Team erfolgreich erstellt", data };
+    return { success: true, message: "Squad successfully created", data };
   } catch (error) {
-    console.log(error);
-    return { success: false, message: "Fehler beim Erstellen des Teams" };
+    console.error(error);
+    return {
+      success: false,
+      message: "Error occurred while creating the squad",
+    };
   }
 }
 
+/**
+ * Action function to update an existing squad.
+ * @param id The ID of the squad to update.
+ * @param payload The updated data for the squad.
+ * @returns A promise resolving to the result of the update operation, including any data returned from the backend.
+ * @throws Redirects to the login page if the user is not authenticated.
+ */
 export async function updateSquadAction(id: number, payload: SquadPayload) {
   try {
     /**
@@ -83,9 +104,12 @@ export async function updateSquadAction(id: number, payload: SquadPayload) {
       body: JSON.stringify(payload),
     });
 
-    return { success: true, message: "Team erfolgreich aktualisiert", data };
+    return { success: true, message: "Squad successfully updated", data };
   } catch (error) {
-    console.log(error);
-    return { success: false, message: "Fehler beim Aktualisieren des Teams" };
+    console.error(error);
+    return {
+      success: false,
+      message: "Error occurred while updating the squad",
+    };
   }
 }

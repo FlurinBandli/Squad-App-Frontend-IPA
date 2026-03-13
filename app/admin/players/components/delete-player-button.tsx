@@ -27,9 +27,9 @@ export default function DeletePlayerButton({ id }: { id: number }) {
   const handleDelete = async () => {
     const result = await deletePlayerAction(id);
     if (result.success) {
-      toast.success(result.message);
+      toast.success("Spieler erfolgreich gelöscht");
     } else {
-      toast.error(result.message);
+      toast.error("Fehler beim Löschen des Spielers");
     }
   };
 
@@ -52,8 +52,14 @@ export default function DeletePlayerButton({ id }: { id: number }) {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Abbrechen</AlertDialogCancel>
-          <AlertDialogAction variant="destructive" onClick={handleDelete}>
+          <AlertDialogCancel className="cursor-pointer">
+            Abbrechen
+          </AlertDialogCancel>
+          <AlertDialogAction
+            variant="destructive"
+            className="cursor-pointer"
+            onClick={handleDelete}
+          >
             Löschen
           </AlertDialogAction>
         </AlertDialogFooter>

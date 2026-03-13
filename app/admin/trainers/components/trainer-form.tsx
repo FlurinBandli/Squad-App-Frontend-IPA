@@ -38,10 +38,6 @@ const formSchema = z.object({
 
 /**
  * TrainerForm component for creating and editing trainers.
- * @param open Controls whether the form sheet is open or closed.
- * @param setOpen Function to update the open state of the sheet.
- * @param mode Determines whether the form is in "create" or "edit" mode. Defaults to "create".
- * @param trainer The trainer object to edit when in "edit" mode. Optional.
  */
 export default function TrainerForm({
   open,
