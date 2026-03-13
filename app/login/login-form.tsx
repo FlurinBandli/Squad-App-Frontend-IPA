@@ -77,7 +77,7 @@ export default function LoginForm() {
           <CardTitle>Admin Login</CardTitle>
           <Image
             src="/fc-zh-leutschenbach-logo.png"
-            alt="Logo"
+            alt="Logo FC Zürich-Leutschenbach"
             width={60}
             height={60}
           />

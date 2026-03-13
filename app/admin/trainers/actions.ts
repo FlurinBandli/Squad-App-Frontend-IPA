@@ -15,6 +15,8 @@ import { redirect } from "next/navigation";
 /**
  * Action function to delete a trainer.
  * @param id The ID of the trainer to delete.
+ * @returns A promise resolving to the result of the deletion operation.
+ * @throws Redirects to the login page if the user is not authenticated.
  */
 export async function deleteTrainerAction(id: number) {
   /**
@@ -30,13 +32,22 @@ export async function deleteTrainerAction(id: number) {
     });
 
     revalidatePath("/admin/trainers");
-    return { success: true, message: "Trainer erfolgreich gelöscht" };
+    return { success: true, message: "Trainer successfully deleted" };
   } catch (error) {
-    console.log(error);
-    return { success: false, message: "Fehler beim Löschen des Trainers" };
+    console.error(error);
+    return {
+      success: false,
+      message: "Error occurred while deleting the trainer",
+    };
   }
 }
 
+/**
+ * Action function to create a new trainer.
+ * @param payload The data for the new trainer to be created.
+ * @returns A promise resolving to the result of the creation operation, including any data returned from the backend.
+ * @throws Redirects to the login page if the user is not authenticated.
+ */
 export async function createTrainerAction(payload: TrainerPayload) {
   try {
     /**
@@ -57,13 +68,23 @@ export async function createTrainerAction(payload: TrainerPayload) {
       body: JSON.stringify(payload),
     });
 
-    return { success: true, message: "Trainer erfolgreich erstellt", data };
+    return { success: true, message: "Trainer successfully created", data };
   } catch (error) {
-    console.log(error);
-    return { success: false, message: "Fehler beim Erstellen des Trainers" };
+    console.error(error);
+    return {
+      success: false,
+      message: "Error occurred while creating the trainer",
+    };
   }
 }
 
+/**
+ * Action function to update an existing trainer.
+ * @param id The ID of the trainer to update.
+ * @param payload The updated data for the trainer.
+ * @returns A promise resolving to the result of the update operation, including any data returned from the backend.
+ * @throws Redirects to the login page if the user is not authenticated.
+ */
 export async function updateTrainerAction(id: number, payload: TrainerPayload) {
   try {
     /**
@@ -84,12 +105,12 @@ export async function updateTrainerAction(id: number, payload: TrainerPayload) {
       body: JSON.stringify(payload),
     });
 
-    return { success: true, message: "Trainer erfolgreich aktualisiert", data };
+    return { success: true, message: "Trainer successfully updated", data };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       success: false,
-      message: "Fehler beim Aktualisieren des Trainers",
+      message: "Error occurred while updating the trainer",
     };
   }
 }

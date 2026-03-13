@@ -36,6 +36,9 @@ const formSchema = z.object({
   gender: z.enum(["Male", "Female", "Other"]),
 });
 
+/**
+ * PlayerForm component for creating and editing players.
+ */
 export default function PlayerForm({
   open,
   setOpen,
@@ -83,6 +86,7 @@ export default function PlayerForm({
           (mode === "edit" ? "Aktualisieren" : "Erstellen") +
           " des Spielers: "
       );
+      return;
     }
     setOpen(false);
     router.refresh();

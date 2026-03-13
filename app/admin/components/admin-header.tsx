@@ -31,7 +31,7 @@ export default function AdminHeader() {
       <h1 className="text-2xl font-bold">{title}</h1>
       <Image
         src="/fc-zh-leutschenbach-logo.png"
-        alt="Logo"
+        alt="Logo FC Zürich-Leutschenbach"
         width={50}
         height={50}
         className="ml-auto"
