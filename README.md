@@ -1,46 +1,52 @@
-# FC Zürich-Leutschenbach Frontend
+# ⚽ Squad App (IPA Project)
 
-This project is a web application for managing and displaying football squads. Squads can be created and managed in a protected admin area and shared
-with external users via a public link.
+This project was developed as part of my **IPA (Individual Practical Assignment)** during my apprenticeship as an application developer in Switzerland.
 
-The frontend is built with Next.js and communicates with an existing NestJS backend via a REST API.
+It is a web application for managing and displaying football squads, with a protected admin area and a public shareable squad view.
 
-## Tech Stack
+## 🔄 Further Development
+
+An improved and extended version of this project is available here:
+
+👉 https://github.com/FlurinBandli/football-squad-manager
+
+---
+
+## 🎯 Project Context
+
+- Duration: 10 days
+- Goal: Build a functional full-stack application within a fixed timeframe
+- Focus:
+  - Clean structure
+  - API integration
+  - Usable admin interface
+
+---
+
+## 🚀 Features
+
+- Admin area to manage squads, players and trainers
+- Squad builder with player positions
+- Public squad view via shareable link
+- Authentication with NextAuth
+- REST API integration with NestJS backend
+
+---
+
+## 🛠️ Tech Stack
 
 - Next.js
 - TypeScript
 - NextAuth
-- shadcn/ui
 - Tailwind CSS
+- shadcn/ui
+- NestJS (backend API)
 
-## Requirements
+---
 
-- Node.js v20
-- npm
-- Running Nest.js backend (API)
-
-## Setup
-
-1. Clone the repository and install dependencies:
+## ⚙️ Setup
 
 ```bash
 npm install
-```
-
-2. Create a .env file based on the provided example:
-
-```bash
 cp .env.example .env
-```
-
-3. Adjust the values if necessary (API URL, credentials).
-
-## Running the project
-
-Start the development server:
-
-```bash
 npm run dev
-```
-
-Open the application in your browser at [http://localhost:3000](http://localhost:3000)
